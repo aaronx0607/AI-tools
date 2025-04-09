@@ -1,7 +1,34 @@
 <svg width="200" height="40" viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 左侧渐变圆角矩形 -->
   <path d="M10 20C10 14.4772 14.4772 10 20 10H30C35.5228 10 40 14.4772 40 20C40 25.5228 35.5228 30 30 30H20C14.4772 30 10 25.5228 10 20Z" fill="url(#paint0_linear)"/>
-  <path d="M50 15H160" stroke="white" stroke-width="2"/>
-  <path d="M50 25H140" stroke="white" stroke-width="2"/>
+
+  <!-- 工具图标 - 精细的手电筒 -->
+  <!-- 手电筒主体 -->
+  <rect x="22" y="18" width="6" height="10" rx="1.5" fill="white" />
+
+  <!-- 手电筒底部 -->
+  <rect x="22.5" y="27" width="5" height="1.5" rx="0.75" fill="white" fill-opacity="0.9" />
+
+  <!-- 手电筒开关/按钮 -->
+  <rect x="24" y="23" width="2" height="1" rx="0.5" fill="#4F46E5" fill-opacity="0.7" />
+
+  <!-- 手电筒头部连接处 -->
+  <rect x="22" y="17" width="6" height="1.5" rx="0.75" fill="white" fill-opacity="0.9" />
+
+  <!-- 手电筒光源(梯形光束) -->
+  <path d="M22 17L17 10H33L28 17H22Z" fill="white" fill-opacity="0.6" />
+
+  <!-- 光束内部亮光区 -->
+  <path d="M23 17L19.5 12H30.5L27 17H23Z" fill="white" fill-opacity="0.9" />
+
+  <!-- 右侧文字和装饰 -->
+  <text x="50" y="24" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">BestFreeAI.Tools</text>
+
+  <!-- 装饰线条 - 代表目录/列表 -->
+  <!-- <line x1="140" y1="15" x2="170" y2="15" stroke="white" stroke-width="1.5"/>
+  <line x1="145" y1="20" x2="165" y2="20" stroke="white" stroke-width="1.5"/>
+  <line x1="150" y1="25" x2="160" y2="25" stroke="white" stroke-width="1.5"/>
+   -->
   <defs>
     <linearGradient id="paint0_linear" x1="10" y1="20" x2="40" y2="20" gradientUnits="userSpaceOnUse">
       <stop stop-color="#4F46E5"/>
