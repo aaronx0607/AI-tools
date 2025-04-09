@@ -29,12 +29,12 @@ export async function getStaticPaths() {
 
   // 为每个标签和语言创建路径
   const paths = [];
-  
+
   // 为每个标签创建默认语言路径
   tags.forEach(tag => {
     paths.push({ params: { lang: undefined, tag } });
   });
-  
+
   // 为每个标签创建其他语言路径
   const languages = ['es', 'fr', 'zh'];
   languages.forEach(lang => {
@@ -75,9 +75,9 @@ let toolFiles = langToolsMap[lang] || enTools;
 
 // 筛选包含当前标签的工具
 const tagTools = toolFiles
-  .filter(tool => 
-    tool.frontmatter.tags && 
-    Array.isArray(tool.frontmatter.tags) && 
+  .filter(tool =>
+    tool.frontmatter.tags &&
+    Array.isArray(tool.frontmatter.tags) &&
     tool.frontmatter.tags.includes(tag)
   )
   .map(tool => ({
@@ -95,7 +95,7 @@ const tagTools = toolFiles
   title={`${tag} - ${t('tags.title')} - ${t('site.title')}`}
   description={`${t('tags.tagDescription').replace('{tag}', tag)}`}
 >
-  <div class="max-w-4xl mx-auto">
+  <div class="max-w-7xl mx-auto">
     <nav class="text-sm mb-6">
       <ol class="flex items-center space-x-2">
         <li>
@@ -122,13 +122,13 @@ const tagTools = toolFiles
       {t('tags.tagDescription').replace('{tag}', tag)}
     </p>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
       {tagTools.length > 0 ? (
         tagTools.map(tool => (
           <ToolCard tool={tool} />
         ))
       ) : (
-        <p class="text-dark-400 col-span-3 text-center py-8">{t('tags.no-tools')}</p>
+        <p class="text-dark-400 col-span-full text-center py-8">{t('tags.no-tools')}</p>
       )}
     </div>
   </div>

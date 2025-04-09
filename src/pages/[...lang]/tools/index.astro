@@ -53,7 +53,7 @@ const allTools = toolFiles.map(tool => ({
   title={`${t('nav.tools')} - ${t('site.title')}`}
   description={t('site.description')}
 >
-  <div class="max-w-6xl mx-auto">
+  <div class="max-w-7xl mx-auto">
     <nav class="text-sm mb-6">
       <ol class="flex items-center space-x-2">
         <li>
@@ -70,7 +70,7 @@ const allTools = toolFiles.map(tool => ({
       {t('nav.tools')}
     </h1>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
       {allTools.map(tool => (
         <ToolCard tool={tool} />
       ))}

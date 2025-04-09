@@ -5,8 +5,8 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<nav>
-  <ul class="flex space-x-6">
+<nav class="hidden md:block">
+  <ul class="flex space-x-4 lg:space-x-6">
     <li>
       <a href={lang === 'en' ? '/' : `/${lang}/`} class="text-dark-200 hover:text-indigo-400">
         {t('nav.home')}

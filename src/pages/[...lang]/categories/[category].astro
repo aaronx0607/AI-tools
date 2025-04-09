@@ -76,7 +76,7 @@ const categoryTools = toolFiles
   title={`${t(`categories.${category}` as keyof typeof import('../../../i18n/ui').ui.en)} ${t('tools.title')} - ${t('site.title')}`}
   description={`${t('site.description')}`}
 >
-  <div class="max-w-4xl mx-auto">
+  <div class="max-w-7xl mx-auto">
     <nav class="text-sm mb-6">
       <ol class="flex items-center space-x-2">
         <li>
@@ -99,13 +99,13 @@ const categoryTools = toolFiles
       {t(`categories.${category}` as keyof typeof import('../../../i18n/ui').ui.en)} {t('tools.title') || 'AI Tools'}
     </h1>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
       {categoryTools.length > 0 ? (
         categoryTools.map(tool => (
           <ToolCard tool={tool} />
         ))
       ) : (
-        <p class="text-gray-400 col-span-3 text-center py-8">{t('categories.no-tools')}</p>
+        <p class="text-gray-400 col-span-full text-center py-8">{t('categories.no-tools')}</p>
       )}
     </div>
   </div>

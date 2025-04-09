@@ -4,20 +4,101 @@ import { getLangFromUrl } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const path = Astro.url.pathname.replace(`/${lang}`, '') || '/';
+
+// 语言代码到国旗的映射
+const flagEmojis = {
+  en: '🇺🇸',
+  es: '🇪🇸',
+  fr: '🇫🇷',
+  zh: '🇨🇳'
+};
 ---
 
-<div class="relative inline-block text-left">
-  <select
-    class="block w-full rounded-md bg-dark-800 border-dark-700 text-dark-50 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-    onchange="window.location.href = this.value"
-  >
-    {Object.entries(languages).map(([code, name]) => {
-      const href = code === 'en' ? path : `/${code}${path}`;
-      return (
-        <option value={href} selected={code === lang}>
-          {name}
-        </option>
-      );
-    })}
-  </select>
+<!-- 移动端只显示国旗 -->
+<div class="md:hidden relative inline-block text-left">
+  <div class="relative">
+    <button
+      id="mobile-language-button"
+      class="flex items-center justify-center rounded-md bg-dark-800 border border-dark-700 text-dark-50 p-2 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+      style="min-width: 44px; min-height: 44px;"
+    >
+      <span class="text-2xl">{flagEmojis[lang]}</span>
+    </button>
+    <div id="mobile-language-dropdown" class="hidden absolute right-0 mt-2 w-auto bg-dark-800 border border-dark-700 rounded-md shadow-lg z-50">
+      {Object.entries(languages).map(([code, name]) => {
+        const href = code === 'en' ? path : `/${code}${path}`;
+        return (
+          <a
+            href={href}
+            class={`block px-4 py-2 text-dark-50 hover:bg-dark-700 ${code === lang ? 'bg-dark-700' : ''}`}
+          >
+            <span class="text-xl mr-2">{flagEmojis[code]}</span>
+            <span>{name}</span>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</div>
+
+<script>
+  // 移动端语言下拉菜单切换
+  function initLanguagePicker() {
+    console.log('Initializing language picker...');
+    const mobileLanguageButton = document.getElementById('mobile-language-button');
+    const mobileLanguageDropdown = document.getElementById('mobile-language-dropdown');
+
+    if (mobileLanguageButton && mobileLanguageDropdown) {
+      // 移除旧的事件监听器，防止重复绑定
+      const newButton = mobileLanguageButton.cloneNode(true);
+      mobileLanguageButton.parentNode.replaceChild(newButton, mobileLanguageButton);
+
+      // 添加新的事件监听器
+      newButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        mobileLanguageDropdown.classList.toggle('hidden');
+      });
+
+      // 点击其他地方关闭下拉菜单
+      const handleOutsideClick = function(e) {
+        if (!newButton.contains(e.target) && !mobileLanguageDropdown.contains(e.target)) {
+          mobileLanguageDropdown.classList.add('hidden');
+        }
+      };
+
+      // 移除旧的事件监听器
+      document.removeEventListener('click', handleOutsideClick);
+      // 添加新的事件监听器
+      document.addEventListener('click', handleOutsideClick);
+    }
+  }
+
+  // 页面加载时初始化
+  document.addEventListener('DOMContentLoaded', initLanguagePicker);
+
+  // Astro视图转换后重新初始化
+  document.addEventListener('astro:page-load', initLanguagePicker);
+</script>
+
+<!-- PC端显示国旗加语言 -->
+<div class="hidden md:block relative inline-block text-left">
+  <div class="relative">
+    <select
+      class="block w-full rounded-md bg-dark-800 border-dark-700 text-dark-50 py-2 pl-10 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+      onchange="window.location.href = this.value"
+      style="min-width: 140px; font-size: 1rem;"
+    >
+      {Object.entries(languages).map(([code, name]) => {
+        const href = code === 'en' ? path : `/${code}${path}`;
+        return (
+          <option value={href} selected={code === lang}>
+            {name}
+          </option>
+        );
+      })}
+    </select>
+    <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none text-2xl">
+      {flagEmojis[lang]}
+    </div>
+  </div>
 </div>

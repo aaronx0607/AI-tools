@@ -3,7 +3,7 @@ import { ViewTransitions } from 'astro:transitions';
 import LanguagePicker from '../components/LanguagePicker.astro';
 import Navigation from '../components/Navigation.astro';
 import Sidebar from '../components/Sidebar.astro';
-import { getLangFromUrl } from '../i18n/utils';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
 interface Props {
   title: string;
@@ -14,6 +14,7 @@ interface Props {
 
 const { title, description, image = '/default-og.png', currentCategory } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <!doctype html>
@@ -25,71 +26,208 @@ const lang = getLangFromUrl(Astro.url);
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
-    
+
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={image} />
     <meta property="og:type" content="website" />
-    
+
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
-    
+
     <ViewTransitions />
   </head>
   <body class="min-h-screen bg-dark-900 text-dark-50">
-    <header class="bg-dark-800 border-b border-dark-700 fixed w-full top-0 z-10">
-      <div class="container mx-auto px-4 py-4">
+    <Sidebar currentCategory={currentCategory} />
+
+    <header class="bg-dark-800 border-b border-dark-700 fixed w-full top-0 z-40 lg:pl-64">
+      <div class="px-4 py-4">
         <div class="flex justify-between items-center">
-          <button id="sidebar-toggle" class="lg:hidden text-dark-200 hover:text-indigo-400">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
+          <div class="flex items-center">
+            <button id="sidebar-toggle" class="lg:hidden text-dark-200 hover:text-indigo-400 mr-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+            <a href={lang === 'en' ? '/' : `/${lang}/`} class="text-xl font-bold text-white md:hidden">
+              AI Tools
+            </a>
+          </div>
           <Navigation />
-          <LanguagePicker />
+          <div class="flex items-center">
+            <button id="mobile-menu-toggle" class="md:hidden text-dark-200 hover:text-indigo-400 mr-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v.01M12 12v.01M12 18v.01M19 6v.01M19 12v.01M19 18v.01M5 6v.01M5 12v.01M5 18v.01" />
+              </svg>
+            </button>
+            <LanguagePicker />
+          </div>
         </div>
       </div>
     </header>
-    
-    <Sidebar currentCategory={currentCategory} />
-    
-    <main class="lg:pl-64 pt-16">
-      <div class="container mx-auto px-4 lg:px-8 py-8">
+
+    <!-- Mobile Navigation Menu -->
+    <div id="mobile-menu" class="fixed inset-0 bg-dark-800 z-50 transform translate-y-full transition-transform duration-300 flex flex-col">
+      <div class="flex justify-between items-center p-4 border-b border-dark-700">
+        <h2 class="text-xl font-bold text-white">Menu</h2>
+        <button id="mobile-menu-close" class="text-dark-200 hover:text-indigo-400">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <nav class="p-4">
+        <ul class="space-y-4">
+          <li>
+            <a href={lang === 'en' ? '/' : `/${lang}/`} class="text-dark-200 hover:text-indigo-400 block py-2">
+              Home
+            </a>
+          </li>
+          <li>
+            <a href={lang === 'en' ? '/categories' : `/${lang}/categories`} class="text-dark-200 hover:text-indigo-400 block py-2">
+              Categories
+            </a>
+          </li>
+          <li>
+            <a href={lang === 'en' ? '/tools' : `/${lang}/tools`} class="text-dark-200 hover:text-indigo-400 block py-2">
+              Tools
+            </a>
+          </li>
+          <li>
+            <a href={lang === 'en' ? '/tags' : `/${lang}/tags`} class="text-dark-200 hover:text-indigo-400 block py-2">
+              Tags
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <main class="pt-16 transition-all duration-300 lg:pl-64">
+      <div class="px-4 md:px-6 lg:px-8 py-8 max-w-full overflow-x-hidden">
         <slot />
       </div>
     </main>
-    
-    <footer class="bg-dark-800 border-t border-dark-700 text-dark-200 py-8 lg:pl-64">
-      <div class="container mx-auto px-4">
+
+    <footer class="bg-dark-800 border-t border-dark-700 text-dark-200 py-8 transition-all duration-300 lg:pl-64">
+      <div class="px-4 md:px-6 lg:px-8">
         <p class="text-center">&copy; 2025 AI Tools Directory. All rights reserved.</p>
       </div>
     </footer>
 
     <script>
-      const sidebar = document.querySelector('aside');
-      const sidebarToggle = document.getElementById('sidebar-toggle');
-      const overlay = document.createElement('div');
-      overlay.className = 'fixed inset-0 bg-black bg-opacity-50 z-20 hidden lg:hidden';
-      document.body.appendChild(overlay);
+      // 使用函数封装侧边栏初始化逻辑
+      function initSidebar() {
+        console.log('Initializing sidebar...');
+        // 侧边栏相关元素
+        const sidebar = document.querySelector('aside');
+        const sidebarToggle = document.getElementById('sidebar-toggle');
 
-      sidebarToggle?.addEventListener('click', () => {
-        sidebar?.classList.toggle('-translate-x-full');
-        overlay.classList.toggle('hidden');
-      });
+        // 移动导航菜单相关元素
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
 
-      overlay.addEventListener('click', () => {
-        sidebar?.classList.add('-translate-x-full');
-        overlay.classList.add('hidden');
-      });
+        if (!sidebar || !sidebarToggle) {
+          console.error('Sidebar or toggle button not found');
+          return;
+        }
 
-      // 初始状态
-      if (sidebar && window.innerWidth < 1024) {
-        sidebar.classList.add('-translate-x-full');
+        // 移除旧的事件监听器，防止重复绑定
+        const newSidebarToggle = sidebarToggle.cloneNode(true);
+        if (sidebarToggle.parentNode) {
+          sidebarToggle.parentNode.replaceChild(newSidebarToggle, sidebarToggle);
+        }
+
+        // 创建遮罩层
+        const overlay = document.createElement('div');
+        overlay.className = 'fixed inset-0 bg-black bg-opacity-50 z-30 hidden';
+        document.body.appendChild(overlay);
+
+        // 确保小屏幕下侧边栏默认隐藏
+        if (window.innerWidth < 1024) {
+          sidebar.classList.add('-translate-x-full');
+        }
+
+        // 切换侧边栏
+        newSidebarToggle.addEventListener('click', function(e) {
+          e.preventDefault();
+          sidebar.classList.toggle('-translate-x-full');
+          overlay.classList.toggle('hidden');
+          document.body.classList.toggle('overflow-hidden');
+          console.log('Sidebar toggle clicked', sidebar.classList.contains('-translate-x-full') ? 'hidden' : 'visible');
+        });
+
+        // 点击遮罩层关闭侧边栏
+        overlay.addEventListener('click', function() {
+          sidebar.classList.add('-translate-x-full');
+          overlay.classList.add('hidden');
+          document.body.classList.remove('overflow-hidden');
+        });
+
+        // 移动导航菜单切换
+        if (mobileMenuToggle && mobileMenu) {
+          // 移除旧的事件监听器
+          const newMobileMenuToggle = mobileMenuToggle.cloneNode(true);
+          if (mobileMenuToggle.parentNode) {
+            mobileMenuToggle.parentNode.replaceChild(newMobileMenuToggle, mobileMenuToggle);
+          }
+
+          // 添加新的事件监听器
+          newMobileMenuToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            mobileMenu.classList.toggle('translate-y-full');
+            document.body.classList.toggle('overflow-hidden');
+          });
+        }
+
+        // 关闭移动导航菜单
+        if (mobileMenuClose && mobileMenu) {
+          // 移除旧的事件监听器
+          const newMobileMenuClose = mobileMenuClose.cloneNode(true);
+          if (mobileMenuClose.parentNode) {
+            mobileMenuClose.parentNode.replaceChild(newMobileMenuClose, mobileMenuClose);
+          }
+
+          // 添加新的事件监听器
+          newMobileMenuClose.addEventListener('click', function() {
+            mobileMenu.classList.add('translate-y-full');
+            document.body.classList.remove('overflow-hidden');
+          });
+        }
+
+        // 监听窗口大小变化
+        window.addEventListener('resize', function() {
+          if (window.innerWidth >= 1024) {
+            sidebar.classList.remove('-translate-x-full');
+            overlay.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+            if (mobileMenu) {
+              mobileMenu.classList.add('translate-y-full');
+            }
+          } else {
+            sidebar.classList.add('-translate-x-full');
+          }
+        });
       }
+
+      // 页面加载时初始化
+      document.addEventListener('DOMContentLoaded', initSidebar);
+
+      // Astro视图转换后重新初始化
+      document.addEventListener('astro:page-load', initSidebar);
+
+      // 页面卸载前清理
+      document.addEventListener('astro:before-swap', function() {
+        // 清理可能的事件监听器和元素
+        const overlay = document.querySelector('.fixed.inset-0.bg-black.bg-opacity-50');
+        if (overlay && overlay.parentNode) {
+          overlay.parentNode.removeChild(overlay);
+        }
+      });
     </script>
   </body>
 </html>
