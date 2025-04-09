@@ -1,0 +1,42 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
+import CategoryGrid from '../../../components/CategoryGrid.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: undefined } },
+    { params: { lang: 'es' } },
+    { params: { lang: 'fr' } },
+    { params: { lang: 'zh' } }
+  ];
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout
+  title={`${t('categories.title')} - ${t('site.title')}`}
+  description="Explore all categories of AI tools in our directory."
+>
+  <div class="max-w-6xl mx-auto">
+    <nav class="text-sm mb-6">
+      <ol class="flex items-center space-x-2">
+        <li>
+          <a href={`/${lang === 'en' ? '' : lang}`} class="text-gray-500 hover:text-indigo-600">
+            {t('nav.home')}
+          </a>
+        </li>
+        <li class="text-gray-500">/</li>
+        <li class="text-gray-900">{t('categories.title')}</li>
+      </ol>
+    </nav>
+
+    <h1 class="text-4xl font-bold mb-8">
+      {t('categories.title')}
+    </h1>
+
+    <CategoryGrid />
+  </div>
+</Layout>

@@ -1,0 +1,178 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
+import { marked } from 'marked';
+
+export async function getStaticPaths() {
+  const languages = ['en', 'es', 'fr', 'zh'];
+  const allPaths = [];
+
+  // 使用import.meta.glob静态导入所有语言的工具文件
+  const enToolsModules = import.meta.glob('../../../content/tools/en/*.md', { eager: true });
+  const esToolsModules = import.meta.glob('../../../content/tools/es/*.md', { eager: true });
+  const frToolsModules = import.meta.glob('../../../content/tools/fr/*.md', { eager: true });
+  const zhToolsModules = import.meta.glob('../../../content/tools/zh/*.md', { eager: true });
+
+  // 将模块转换为工具数组
+  const enTools = Object.values(enToolsModules);
+  const esTools = Object.values(esToolsModules);
+  const frTools = Object.values(frToolsModules);
+  const zhTools = Object.values(zhToolsModules);
+
+  // 创建语言到工具数组的映射
+  const langToolsMap = {
+    en: enTools,
+    es: esTools,
+    fr: frTools,
+    zh: zhTools
+  };
+
+  // 获取所有工具ID
+  const toolIds = [...new Set(enTools.map(tool => tool.frontmatter.id))];
+
+  // 为每个工具ID和语言创建路径
+  for (const id of toolIds) {
+    // 默认语言路径（英文）
+    const enTool = enTools.find(tool => tool.frontmatter.id === id);
+    if (enTool) {
+      allPaths.push({
+        params: { lang: undefined, id },
+        props: { tool: enTool }
+      });
+    }
+
+    // 其他语言路径
+    for (const lang of languages) {
+      // 获取当前语言的工具数组
+      const langTools = langToolsMap[lang];
+      const langTool = langTools.find(tool => tool.frontmatter.id === id);
+
+      if (langTool) {
+        // 如果找到了特定语言的工具文件，使用它
+        allPaths.push({
+          params: { lang, id },
+          props: { tool: langTool }
+        });
+      } else if (enTool) {
+        // 如果没有找到特定语言的工具文件，使用英文版本
+        allPaths.push({
+          params: { lang, id },
+          props: { tool: enTool }
+        });
+      }
+    }
+  }
+
+  return allPaths;
+}
+
+const { tool } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const content = await tool.compiledContent();
+---
+
+<Layout
+  title={`${tool.frontmatter.name} - ${t('site.title')}`}
+  description={tool.frontmatter.description}
+  currentCategory={tool.frontmatter.category}
+>
+  <div class="max-w-4xl">
+    <nav class="text-sm mb-6">
+      <ol class="flex items-center space-x-2">
+        <li>
+          <a href={`/${lang === 'en' ? '' : lang}`} class="text-dark-400 hover:text-indigo-400">
+            {t('nav.home')}
+          </a>
+        </li>
+        <li class="text-dark-500">/</li>
+        <li>
+          <a href={`/${lang === 'en' ? '' : lang}/tools`} class="text-dark-400 hover:text-indigo-400">
+            {t('nav.tools')}
+          </a>
+        </li>
+        <li class="text-dark-500">/</li>
+        <li class="text-dark-200">{tool.frontmatter.name}</li>
+      </ol>
+    </nav>
+
+    <div class="prose prose-invert max-w-none">
+      {tool.frontmatter.tags && (
+        <div class="flex flex-wrap gap-2 mb-6">
+          {tool.frontmatter.tags.map((tag: string) => {
+            const tagUrl = lang === 'en' ? `/tags/${encodeURIComponent(tag)}` : `/${lang}/tags/${encodeURIComponent(tag)}`;
+            return (
+              <a
+                href={tagUrl}
+                class="bg-dark-700 hover:bg-dark-600 text-dark-200 text-xs px-2 py-1 rounded transition-colors duration-200"
+              >
+                {tag}
+              </a>
+            );
+          })}
+        </div>
+      )}
+      <article set:html={content} />
+    </div>
+
+    <div class="fixed top-24 right-8 w-64 bg-dark-800 p-6 rounded-lg border border-dark-700">
+      <h2 class="text-xl font-semibold mb-4">{t('tool.quickInfo')}</h2>
+      <div class="space-y-4">
+        <div>
+          <div class="text-dark-400 mb-1">{t('tool.category')}</div>
+          <div class="text-indigo-400">{t(`categories.${tool.frontmatter.category}`)}</div>
+        </div>
+        {tool.frontmatter.tags && (
+          <div>
+            <div class="text-dark-400 mb-1">{t('tool.tags')}</div>
+            <div class="flex flex-wrap gap-2">
+              {tool.frontmatter.tags.map((tag: string) => {
+                const tagUrl = lang === 'en' ? `/tags/${encodeURIComponent(tag)}` : `/${lang}/tags/${encodeURIComponent(tag)}`;
+                return (
+                  <a
+                    href={tagUrl}
+                    class="bg-dark-700 hover:bg-dark-600 text-dark-200 text-xs px-2 py-1 rounded transition-colors duration-200"
+                  >
+                    {tag}
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        )}
+        <div>
+          <div class="text-dark-400 mb-1">{t('tool.rating')}</div>
+          <div class="flex items-center">
+            <span class="text-yellow-500">★</span>
+            <span class="ml-1">{tool.frontmatter.rating}</span>
+            <span class="ml-2 text-dark-400">({tool.frontmatter.reviews} {t('tool.reviews')})</span>
+          </div>
+        </div>
+        <div>
+          <div class="text-dark-400 mb-1">{t('tool.pricing')}</div>
+          <div class="space-y-1">
+            {tool.frontmatter.pricing && Object.entries(tool.frontmatter.pricing).map(([plan, price]) => (
+              <div class="flex justify-between">
+                <span class="capitalize">{t(`tool.plans.${plan}`)}</span>
+                <span>{price}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        {tool.frontmatter.website && (
+          <div>
+            <a
+              href={tool.frontmatter.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block w-full text-center py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-md transition-colors duration-200"
+            >
+              {t('tool.visit-website')}
+            </a>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,135 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
+import ToolCard from '../../../components/ToolCard.astro';
+
+export async function getStaticPaths() {
+  // 使用import.meta.glob静态导入所有语言的工具文件
+  const enToolsModules = import.meta.glob('../../../content/tools/en/*.md', { eager: true });
+  const esToolsModules = import.meta.glob('../../../content/tools/es/*.md', { eager: true });
+  const frToolsModules = import.meta.glob('../../../content/tools/fr/*.md', { eager: true });
+  const zhToolsModules = import.meta.glob('../../../content/tools/zh/*.md', { eager: true });
+
+  // 将模块转换为工具数组
+  const enTools = Object.values(enToolsModules);
+  const esTools = Object.values(esToolsModules);
+  const frTools = Object.values(frToolsModules);
+  const zhTools = Object.values(zhToolsModules);
+
+  // 收集所有标签
+  const allTags = new Set();
+  enTools.forEach(tool => {
+    if (tool.frontmatter.tags && Array.isArray(tool.frontmatter.tags)) {
+      tool.frontmatter.tags.forEach(tag => allTags.add(tag));
+    }
+  });
+
+  // 将标签转换为数组
+  const tags = Array.from(allTags);
+
+  // 为每个标签和语言创建路径
+  const paths = [];
+  
+  // 为每个标签创建默认语言路径
+  tags.forEach(tag => {
+    paths.push({ params: { lang: undefined, tag } });
+  });
+  
+  // 为每个标签创建其他语言路径
+  const languages = ['es', 'fr', 'zh'];
+  languages.forEach(lang => {
+    tags.forEach(tag => {
+      paths.push({ params: { lang, tag } });
+    });
+  });
+
+  return paths;
+}
+
+const { tag } = Astro.params;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// 使用import.meta.glob静态导入所有语言的工具文件
+const enToolsModules = import.meta.glob('../../../content/tools/en/*.md', { eager: true });
+const esToolsModules = import.meta.glob('../../../content/tools/es/*.md', { eager: true });
+const frToolsModules = import.meta.glob('../../../content/tools/fr/*.md', { eager: true });
+const zhToolsModules = import.meta.glob('../../../content/tools/zh/*.md', { eager: true });
+
+// 将模块转换为工具数组
+const enTools = Object.values(enToolsModules);
+const esTools = Object.values(esToolsModules);
+const frTools = Object.values(frToolsModules);
+const zhTools = Object.values(zhToolsModules);
+
+// 创建语言到工具数组的映射
+const langToolsMap = {
+  en: enTools,
+  es: esTools,
+  fr: frTools,
+  zh: zhTools
+};
+
+// 获取当前语言的工具文件
+let toolFiles = langToolsMap[lang] || enTools;
+
+// 筛选包含当前标签的工具
+const tagTools = toolFiles
+  .filter(tool => 
+    tool.frontmatter.tags && 
+    Array.isArray(tool.frontmatter.tags) && 
+    tool.frontmatter.tags.includes(tag)
+  )
+  .map(tool => ({
+    id: tool.frontmatter.id,
+    name: tool.frontmatter.name,
+    description: tool.frontmatter.description,
+    category: tool.frontmatter.category,
+    rating: tool.frontmatter.rating,
+    reviews: tool.frontmatter.reviews,
+    website: tool.frontmatter.website
+  }));
+---
+
+<Layout
+  title={`${tag} - ${t('tags.title')} - ${t('site.title')}`}
+  description={`${t('tags.tagDescription').replace('{tag}', tag)}`}
+>
+  <div class="max-w-4xl mx-auto">
+    <nav class="text-sm mb-6">
+      <ol class="flex items-center space-x-2">
+        <li>
+          <a href={`/${lang === 'en' ? '' : lang}`} class="text-dark-400 hover:text-indigo-400">
+            {t('nav.home')}
+          </a>
+        </li>
+        <li class="text-dark-500">/</li>
+        <li>
+          <a href={`/${lang === 'en' ? '' : lang}/tags`} class="text-dark-400 hover:text-indigo-400">
+            {t('tags.title')}
+          </a>
+        </li>
+        <li class="text-dark-500">/</li>
+        <li class="text-dark-200">{tag}</li>
+      </ol>
+    </nav>
+
+    <h1 class="text-4xl font-bold mb-8">
+      {tag}
+    </h1>
+
+    <p class="text-dark-300 mb-8">
+      {t('tags.tagDescription').replace('{tag}', tag)}
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {tagTools.length > 0 ? (
+        tagTools.map(tool => (
+          <ToolCard tool={tool} />
+        ))
+      ) : (
+        <p class="text-dark-400 col-span-3 text-center py-8">{t('tags.no-tools')}</p>
+      )}
+    </div>
+  </div>
+</Layout>

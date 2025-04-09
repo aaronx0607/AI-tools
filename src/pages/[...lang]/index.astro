@@ -1,0 +1,83 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import SearchBar from '../../components/SearchBar.astro';
+import CategoryGrid from '../../components/CategoryGrid.astro';
+import LatestTools from '../../components/LatestTools.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: undefined } },
+    { params: { lang: 'es' } },
+    { params: { lang: 'fr' } },
+    { params: { lang: 'zh' } }
+  ];
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout
+  title="AI Tools Directory - Find the Best AI Tools"
+  description="Discover and compare the best AI tools for your needs. Our comprehensive directory features detailed reviews, ratings, and comparisons."
+>
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12">
+      <h1 class="text-5xl font-bold mb-4">
+        {t('site.title')}
+      </h1>
+      <p class="text-xl text-dark-300 max-w-2xl mx-auto">
+        {t('site.description')}
+      </p>
+    </div>
+
+    <div class="max-w-2xl mx-auto mb-16">
+      <SearchBar />
+    </div>
+
+    <section class="mb-16">
+      <div class="flex justify-between items-center mb-8">
+        <h2 class="text-3xl font-semibold">{t('categories.title')}</h2>
+        <a href={lang === 'en' ? '/categories' : `/${lang}/categories`} class="text-indigo-400 hover:text-indigo-300">
+          {t('nav.viewAll')} →
+        </a>
+      </div>
+      <CategoryGrid />
+    </section>
+
+    <section class="mb-16">
+      <div class="flex justify-between items-center mb-8">
+        <h2 class="text-3xl font-semibold">{t('tools.latest')}</h2>
+        <a href={lang === 'en' ? '/tools' : `/${lang}/tools`} class="text-indigo-400 hover:text-indigo-300">
+          {t('nav.viewAll')} →
+        </a>
+      </div>
+      <LatestTools />
+    </section>
+
+    <section class="bg-dark-800 border border-dark-700 rounded-lg p-8 mb-16">
+      <div class="text-center">
+        <h2 class="text-3xl font-semibold mb-4">{t('features.title')}</h2>
+        <p class="text-dark-300 mb-8">{t('features.description')}</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="text-4xl mb-4">🔍</div>
+          <h3 class="text-xl font-semibold mb-2">{t('features.search.title')}</h3>
+          <p class="text-dark-300">{t('features.search.description')}</p>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl mb-4">⭐</div>
+          <h3 class="text-xl font-semibold mb-2">{t('features.reviews.title')}</h3>
+          <p class="text-dark-300">{t('features.reviews.description')}</p>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl mb-4">📊</div>
+          <h3 class="text-xl font-semibold mb-2">{t('features.compare.title')}</h3>
+          <p class="text-dark-300">{t('features.compare.description')}</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

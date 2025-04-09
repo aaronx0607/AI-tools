@@ -1,0 +1,99 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<div class="relative" id="search-container">
+  <input
+    type="search"
+    id="search-input"
+    class="w-full px-4 py-3 rounded-lg bg-dark-800 border border-dark-700 focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-dark-50 placeholder-dark-400"
+    placeholder={t('search.placeholder')}
+  />
+  <button
+    type="submit"
+    class="absolute right-3 top-1/2 -translate-y-1/2 text-dark-400 hover:text-indigo-400"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+    </svg>
+  </button>
+  <div id="search-results" class="absolute w-full mt-2 bg-dark-800 border border-dark-700 rounded-lg shadow-lg hidden">
+  </div>
+</div>
+
+<script>
+  import Fuse from 'fuse.js';
+
+  const searchInput = document.getElementById('search-input');
+  const searchResults = document.getElementById('search-results');
+  const lang = document.documentElement.lang || 'en';
+
+  // 动态获取工具数据
+  async function getTools() {
+    try {
+      const response = await fetch('/api/tools.json');
+      if (response.ok) {
+        return await response.json();
+      }
+      return [];
+    } catch (error) {
+      console.error('Error fetching tools:', error);
+      return [];
+    }
+  }
+
+  let tools: any[] = [];
+
+  // 初始化搜索功能
+  function initSearch() {
+    const fuse = new Fuse(tools, {
+      keys: ['name', 'description', 'category'],
+      threshold: 0.3
+    });
+
+    searchInput?.addEventListener('input', (e) => {
+      const target = e.target as HTMLInputElement;
+      const query = target.value;
+
+      if (!query) {
+        if (searchResults) searchResults.classList.add('hidden');
+        return;
+      }
+
+      const results = fuse.search(query);
+
+      if (searchResults) {
+        searchResults.innerHTML = results.length ? results
+          .slice(0, 5)
+          .map(result => `
+            <a href="/${lang === 'en' ? '' : lang}/tools/${result.item.id}"
+               class="block p-4 hover:bg-dark-700">
+              <div class="font-semibold text-dark-50">${result.item.name}</div>
+              <div class="text-sm text-dark-300">${result.item.description}</div>
+            </a>
+          `).join('') : `
+            <div class="p-4 text-dark-300">No results found</div>
+          `;
+
+        searchResults.classList.remove('hidden');
+      }
+    });
+  }
+
+  // 获取工具数据并初始化搜索
+  getTools().then(data => {
+    tools = data;
+    initSearch();
+  });
+
+  // 点击外部关闭搜索结果
+  document.addEventListener('click', (e) => {
+    const container = document.getElementById('search-container');
+    if (container && !container.contains(e.target as Node)) {
+      if (searchResults) searchResults.classList.add('hidden');
+    }
+  });
+</script>

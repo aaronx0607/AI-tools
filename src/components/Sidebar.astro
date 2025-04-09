@@ -1,0 +1,47 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const categories = [
+  { id: 'text-generation', name: 'categories.text-generation', icon: '📝' },
+  { id: 'image-generation', name: 'categories.image-generation', icon: '🎨' },
+  { id: 'code-generation', name: 'categories.code-generation', icon: '💻' },
+  { id: 'audio-generation', name: 'categories.audio-generation', icon: '🎵' },
+  { id: 'video-generation', name: 'categories.video-generation', icon: '🎥' },
+  { id: 'chatbots', name: 'categories.chatbots', icon: '💬' },
+  { id: 'data-analysis', name: 'categories.data-analysis', icon: '📊' },
+  { id: 'automation', name: 'categories.automation', icon: '⚙️' }
+];
+
+const { currentCategory } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const prefix = lang === 'en' ? '' : `/${lang}`;
+---
+
+<aside class="w-64 bg-dark-800 border-r border-dark-700 h-screen fixed left-0 top-0 overflow-y-auto pt-20 transform transition-transform duration-300 lg:translate-x-0 z-30">
+  <div class="px-6 mb-8">
+    <a href={lang === 'en' ? '/' : `/${lang}/`} class="block">
+      <img src="/logo.svg" alt="AI Tools Directory" class="h-8" />
+    </a>
+  </div>
+  <nav class="px-4">
+    <h2 class="text-lg font-semibold mb-4 text-dark-100">{t('categories.title')}</h2>
+    <ul class="space-y-2">
+      {categories.map(category => (
+        <li>
+          <a
+            href={`${prefix}/categories/${category.id}`}
+            class={`flex items-center px-4 py-2 rounded-lg transition-colors duration-200 ${
+              currentCategory === category.id
+                ? 'bg-indigo-600 text-white'
+                : 'text-dark-200 hover:bg-dark-700'
+            }`}
+          >
+            <span class="mr-3">{category.icon}</span>
+            {t(category.name as keyof typeof import('../i18n/ui').ui.en)}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</aside>

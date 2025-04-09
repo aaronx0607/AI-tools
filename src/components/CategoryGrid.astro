@@ -1,0 +1,62 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+// 使用import.meta.glob静态导入所有语言的工具文件
+const enToolsModules = import.meta.glob('../content/tools/en/*.md', { eager: true });
+const esToolsModules = import.meta.glob('../content/tools/es/*.md', { eager: true });
+const frToolsModules = import.meta.glob('../content/tools/fr/*.md', { eager: true });
+const zhToolsModules = import.meta.glob('../content/tools/zh/*.md', { eager: true });
+
+// 将模块转换为工具数组
+const enTools = Object.values(enToolsModules);
+const esTools = Object.values(esToolsModules);
+const frTools = Object.values(frToolsModules);
+const zhTools = Object.values(zhToolsModules);
+
+// 创建语言到工具数组的映射
+const langToolsMap = {
+  en: enTools,
+  es: esTools,
+  fr: frTools,
+  zh: zhTools
+};
+
+// 获取当前语言
+const lang = getLangFromUrl(Astro.url);
+
+// 获取当前语言的工具文件
+let toolFiles = langToolsMap[lang] || enTools;
+
+// 计算每个分类的工具数量
+const categoryCounts: Record<string, number> = {};
+toolFiles.forEach((tool: any) => {
+  const category = tool.frontmatter.category;
+  categoryCounts[category] = (categoryCounts[category] || 0) + 1;
+});
+
+const categories = [
+  { id: 'text-generation', name: 'categories.text-generation', icon: '📝', count: categoryCounts['text-generation'] || 0 },
+  { id: 'image-generation', name: 'categories.image-generation', icon: '🎨', count: categoryCounts['image-generation'] || 0 },
+  { id: 'code-generation', name: 'categories.code-generation', icon: '💻', count: categoryCounts['code-generation'] || 0 },
+  { id: 'audio-generation', name: 'categories.audio-generation', icon: '🎵', count: categoryCounts['audio-generation'] || 0 },
+  { id: 'video-generation', name: 'categories.video-generation', icon: '🎥', count: categoryCounts['video-generation'] || 0 },
+  { id: 'chatbots', name: 'categories.chatbots', icon: '💬', count: categoryCounts['chatbots'] || 0 },
+  { id: 'data-analysis', name: 'categories.data-analysis', icon: '📊', count: categoryCounts['data-analysis'] || 0 },
+  { id: 'automation', name: 'categories.automation', icon: '⚙️', count: categoryCounts['automation'] || 0 }
+];
+
+const t = useTranslations(lang);
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+  {categories.map(category => (
+    <a
+      href={lang === 'en' ? `/categories/${category.id}` : `/${lang}/categories/${category.id}`}
+      class="bg-dark-800 p-6 rounded-lg border border-dark-700 hover:border-dark-600 transition-colors duration-200"
+    >
+      <div class="text-4xl mb-3">{category.icon}</div>
+      <h3 class="text-xl font-semibold mb-2 text-dark-50">{t(category.name as keyof typeof import('../i18n/ui').ui.en)}</h3>
+      <p class="text-dark-300">{category.count} tools</p>
+    </a>
+  ))}
+</div>

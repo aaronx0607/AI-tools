@@ -1,0 +1,23 @@
+---
+import { languages } from '../i18n/ui';
+import { getLangFromUrl } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const path = Astro.url.pathname.replace(`/${lang}`, '') || '/';
+---
+
+<div class="relative inline-block text-left">
+  <select
+    class="block w-full rounded-md bg-dark-800 border-dark-700 text-dark-50 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+    onchange="window.location.href = this.value"
+  >
+    {Object.entries(languages).map(([code, name]) => {
+      const href = code === 'en' ? path : `/${code}${path}`;
+      return (
+        <option value={href} selected={code === lang}>
+          {name}
+        </option>
+      );
+    })}
+  </select>
+</div>
