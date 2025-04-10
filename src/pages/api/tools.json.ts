@@ -7,8 +7,13 @@ export const GET: APIRoute = async ({ request }) => {
     const url = new URL(request.url);
     let lang = url.searchParams.get('lang') || defaultLang;
 
+    // 调试信息
+    console.log('API Request URL:', request.url);
+    console.log('Detected language:', lang);
+
     // 验证语言是否有效
     if (!Object.keys(languages).includes(lang)) {
+      console.log('Invalid language, falling back to default:', defaultLang);
       lang = defaultLang;
     }
 
@@ -16,10 +21,17 @@ export const GET: APIRoute = async ({ request }) => {
     const toolFiles = import.meta.glob('../../content/tools/*/*.md', { eager: true });
 
     // 根据语言过滤工具
+    const allPaths = Object.keys(toolFiles);
+    console.log('All tool paths:', allPaths);
+
     const filteredTools = Object.entries(toolFiles).filter(([path]) => {
       // 检查路径是否包含指定语言的目录
-      return path.includes(`/tools/${lang}/`);
+      const matches = path.includes(`/tools/${lang}/`);
+      console.log(`Path: ${path}, Language: ${lang}, Matches: ${matches}`);
+      return matches;
     });
+
+    console.log(`Found ${filteredTools.length} tools for language: ${lang}`);
 
     // 提取工具数据
     const tools = filteredTools.map(([_, tool]: [string, any]) => ({

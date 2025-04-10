@@ -29,19 +29,29 @@ const t = useTranslations(lang);
 
   const searchInput = document.getElementById('search-input');
   const searchResults = document.getElementById('search-results');
+  // 获取当前语言
   const lang = document.documentElement.lang || 'en';
+  console.log('SearchBar - Current language:', lang);
+  console.log('SearchBar - Document language attribute:', document.documentElement.lang);
+  console.log('SearchBar - URL path:', window.location.pathname);
 
   // 动态获取工具数据
   async function getTools() {
     try {
       // 传递当前语言参数
-      const response = await fetch(`/api/tools.json?lang=${lang}`);
+      const apiUrl = `/api/tools.json?lang=${lang}`;
+      console.log('SearchBar - Fetching tools from:', apiUrl);
+
+      const response = await fetch(apiUrl);
       if (response.ok) {
-        return await response.json();
+        const data = await response.json();
+        console.log(`SearchBar - Received ${data.length} tools:`, data);
+        return data;
       }
+      console.log('SearchBar - API response not OK');
       return [];
     } catch (error) {
-      console.error('Error fetching tools:', error);
+      console.error('SearchBar - Error fetching tools:', error);
       return [];
     }
   }
