@@ -40,6 +40,23 @@ const t = useTranslations(lang);
     <meta name="twitter:image" content={image} />
 
     <ViewTransitions />
+
+    <!-- Matomo -->
+    <script is:inline>
+      var _paq = window._paq = window._paq || [];
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="https://matomo.vpssos.com/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '21']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <!-- End Matomo Code -->
+
   </head>
   <body class="min-h-screen bg-dark-900 text-dark-50">
     <Sidebar currentCategory={currentCategory} />
@@ -54,7 +71,7 @@ const t = useTranslations(lang);
               </svg>
             </button>
             <a href={lang === 'en' ? '/' : `/${lang}/`} class="text-xl font-bold text-white md:hidden">
-              AI Tools
+              BestFreeAI.Net
             </a>
           </div>
           <Navigation />
@@ -218,7 +235,20 @@ const t = useTranslations(lang);
       document.addEventListener('DOMContentLoaded', initSidebar);
 
       // Astro视图转换后重新初始化
-      document.addEventListener('astro:page-load', initSidebar);
+      document.addEventListener('astro:page-load', function() {
+        initSidebar();
+
+        // 为Matomo触发页面浏览跟踪
+        // @ts-ignore - Matomo全局变量
+        if (typeof window._paq !== 'undefined') {
+          // @ts-ignore - Matomo全局变量
+          window._paq.push(['setCustomUrl', window.location.pathname + window.location.search]);
+          // @ts-ignore - Matomo全局变量
+          window._paq.push(['setDocumentTitle', document.title]);
+          // @ts-ignore - Matomo全局变量
+          window._paq.push(['trackPageView']);
+        }
+      });
 
       // 页面卸载前清理
       document.addEventListener('astro:before-swap', function() {

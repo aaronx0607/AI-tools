@@ -22,7 +22,7 @@
   <path d="M23 17L19.5 12H30.5L27 17H23Z" fill="white" fill-opacity="0.9" />
 
   <!-- 右侧文字和装饰 -->
-  <text x="50" y="24" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">BestFreeAI.net</text>
+  <text x="50" y="24" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">BestFreeAI.Net</text>
 
   <!-- 装饰线条 - 代表目录/列表 -->
   <!-- <line x1="140" y1="15" x2="170" y2="15" stroke="white" stroke-width="1.5"/>
