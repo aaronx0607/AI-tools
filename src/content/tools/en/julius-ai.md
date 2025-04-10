@@ -6,6 +6,7 @@ category: data-analysis
 rating: 4.7
 reviews: 165
 website: https://julius.ai
+icon: 📈
 pricing:
   free: true
   pro: $24/月

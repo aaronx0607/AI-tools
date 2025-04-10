@@ -35,6 +35,7 @@ category: text-generation
 rating: 4.9
 reviews: 320
 website: https://chat.openai.com
+icon: 🤖
 tags: [AI对话, 文本生成, OpenAI, GPT, 聊天机器人]
 pricing:
   free: true
@@ -66,6 +67,7 @@ features:
 | 字段 | 描述 | 示例 |
 |------|------|------|
 | `website` | 官方网站URL | `https://chat.openai.com` |
+| `icon` | 工具图标（使用emoji或Unicode字符） | `🤖` |
 | `tags` | 标签数组（用于搜索和分类） | `[AI对话, 文本生成, OpenAI]` |
 | `pricing` | 价格计划（键值对） | 见示例 |
 | `features` | 主要功能列表 | 见示例 |
@@ -132,6 +134,7 @@ category: text-generation
 rating: 4.9
 reviews: 320
 website: https://chat.openai.com
+icon: 🤖
 tags: [AI对话, 文本生成, OpenAI, GPT, 聊天机器人]
 pricing:
   free: true
@@ -247,13 +250,13 @@ ChatGPT能够理解上下文，进行连贯的多轮对话，模拟人类交流�
 
 ## 常见问题
 
-**Q: 如何添加新的分类？**  
+**Q: 如何添加新的分类？**
 A: 目前分类是预定义的。如需添加新分类，请联系开发团队。
 
-**Q: 可以使用HTML标签吗？**  
+**Q: 可以使用HTML标签吗？**
 A: 是的，但建议尽量使用Markdown语法以保持一致性。
 
-**Q: 如何更新已有工具的信息？**  
+**Q: 如何更新已有工具的信息？**
 A: 直接编辑对应的Markdown文件，保持ID不变。
 
 ---

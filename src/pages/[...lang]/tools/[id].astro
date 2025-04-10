@@ -99,8 +99,17 @@ const content = await tool.compiledContent();
 
     <div class="flex flex-col lg:flex-row gap-8">
       <div class="prose prose-invert max-w-none lg:max-w-3xl">
+        <div class="flex items-center gap-4 mb-6 non-prose">
+          {tool.frontmatter.icon && (
+            <div class="flex-shrink-0 w-16 h-16 flex items-center justify-center bg-dark-700 rounded-lg text-4xl">
+              {tool.frontmatter.icon}
+            </div>
+          )}
+          <h1 class="text-3xl font-bold m-0">{tool.frontmatter.name}</h1>
+        </div>
+
         {tool.frontmatter.tags && (
-          <div class="flex flex-wrap gap-2 mb-6">
+          <div class="flex flex-wrap gap-2 mb-6 non-prose">
             {tool.frontmatter.tags.map((tag: string) => {
               const tagUrl = lang === 'en' ? `/tags/${encodeURIComponent(tag)}` : `/${lang}/tags/${encodeURIComponent(tag)}`;
               return (
@@ -119,6 +128,13 @@ const content = await tool.compiledContent();
 
       <div class="w-full lg:w-64 bg-dark-800 p-6 rounded-lg border border-dark-700 h-fit sticky top-24 self-start">
       <h2 class="text-xl font-semibold mb-4">{t('tool.quickInfo')}</h2>
+      {tool.frontmatter.icon && (
+        <div class="flex justify-center mb-4">
+          <div class="w-16 h-16 flex items-center justify-center bg-dark-700 rounded-lg text-4xl">
+            {tool.frontmatter.icon}
+          </div>
+        </div>
+      )}
       <div class="space-y-4">
         <div>
           <div class="text-dark-400 mb-1">{t('tool.category')}</div>

@@ -32,7 +32,8 @@ const allTools = toolFiles.map((tool: any) => ({
   category: tool.frontmatter.category,
   rating: tool.frontmatter.rating,
   reviews: tool.frontmatter.reviews,
-  website: tool.frontmatter.website
+  website: tool.frontmatter.website,
+  icon: tool.frontmatter.icon
 }));
 
 // 获取最新的6个工具
@@ -44,11 +45,18 @@ const t = useTranslations(lang);
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
   {latestTools.map((tool: any) => (
     <article class="bg-dark-800 p-6 rounded-lg border border-dark-700 hover:border-dark-600 transition-colors duration-200">
-      <h3 class="text-xl font-semibold mb-2">
-        <a href={lang === 'en' ? `/tools/${tool.id}` : `/${lang}/tools/${tool.id}`} class="text-dark-50 hover:text-indigo-400">
-          {tool.name}
-        </a>
-      </h3>
+      <div class="flex items-center gap-3 mb-3">
+        {tool.icon && (
+          <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-dark-700 rounded-lg text-2xl">
+            {tool.icon}
+          </div>
+        )}
+        <h3 class="text-xl font-semibold">
+          <a href={lang === 'en' ? `/tools/${tool.id}` : `/${lang}/tools/${tool.id}`} class="text-dark-50 hover:text-indigo-400">
+            {tool.name}
+          </a>
+        </h3>
+      </div>
       <p class="text-dark-300 mb-4">{tool.description}</p>
       <div class="flex items-center justify-between">
         <div class="flex items-center">

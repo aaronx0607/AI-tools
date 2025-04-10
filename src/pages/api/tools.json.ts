@@ -26,7 +26,9 @@ export const GET: APIRoute = async ({ request }) => {
       description: tool.frontmatter.description,
       category: tool.frontmatter.category,
       rating: tool.frontmatter.rating,
-      reviews: tool.frontmatter.reviews
+      reviews: tool.frontmatter.reviews,
+      website: tool.frontmatter.website,
+      icon: tool.frontmatter.icon
     }));
 
     return new Response(JSON.stringify(tools), {

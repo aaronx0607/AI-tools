@@ -6,6 +6,7 @@ category: audio-generation
 rating: 4.8
 reviews: 210
 website: https://murf.ai
+icon: 🎤
 pricing:
   basic: $19/月
   pro: $39/月

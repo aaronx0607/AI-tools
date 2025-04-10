@@ -6,6 +6,7 @@ category: code-generation
 rating: 4.6
 reviews: 245
 website: https://codeium.com
+icon: 💻
 pricing:
   free: true
   pro: $12/月

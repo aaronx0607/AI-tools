@@ -6,6 +6,7 @@ category: automation
 rating: 4.7
 reviews: 175
 website: https://www.bardeen.ai
+icon: ⚙️
 pricing:
   free: true
   pro: $15/月
