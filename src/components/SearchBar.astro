@@ -34,7 +34,7 @@ const t = useTranslations(lang);
   // 动态获取工具数据
   async function getTools() {
     try {
-      // 传递当前语言作为查询参数
+      // 传递当前语言参数
       const response = await fetch(`/api/tools.json?lang=${lang}`);
       if (response.ok) {
         return await response.json();
@@ -47,26 +47,6 @@ const t = useTranslations(lang);
   }
 
   let tools: any[] = [];
-
-  // 获取当前语言的“无结果”文本
-  function getNoResultsText() {
-    // 从服务器获取翻译文本
-    const translations = {
-      en: document.querySelector('meta[name="i18n:search.no-results:en"]')?.getAttribute('content') || 'No results found',
-      es: document.querySelector('meta[name="i18n:search.no-results:es"]')?.getAttribute('content') || 'No se encontraron resultados',
-      fr: document.querySelector('meta[name="i18n:search.no-results:fr"]')?.getAttribute('content') || 'Aucun résultat trouvé',
-      zh: document.querySelector('meta[name="i18n:search.no-results:zh"]')?.getAttribute('content') || '未找到结果'
-    };
-
-    // 严格返回当前语言的文本，不再回退到英文
-    const currentLangText = translations[lang as keyof typeof translations];
-    if (currentLangText) {
-      return currentLangText;
-    }
-
-    // 如果当前语言没有翻译，才使用英文
-    return translations.en;
-  }
 
   // 初始化搜索功能
   function initSearch() {
@@ -89,7 +69,7 @@ const t = useTranslations(lang);
       if (searchResults) {
         searchResults.innerHTML = results.length ? results
           .slice(0, 5)
-          .map((result: any) => `
+          .map(result => `
             <a href="/${lang === 'en' ? '' : lang}/tools/${result.item.id}"
                class="block p-4 hover:bg-dark-700">
               <div class="font-semibold text-dark-50">${result.item.name}</div>
@@ -98,6 +78,17 @@ const t = useTranslations(lang);
           `).join('') : `
             <div class="p-4 text-dark-300">${getNoResultsText()}</div>
           `;
+
+        // 获取当前语言的“未找到结果”文本
+        function getNoResultsText() {
+          const translations: Record<string, string> = {
+            'en': 'No results found',
+            'es': 'No se encontraron resultados',
+            'fr': 'Aucun résultat trouvé',
+            'zh': '未找到结果'
+          };
+          return translations[lang] || translations['en'];
+        }
 
         searchResults.classList.remove('hidden');
       }
