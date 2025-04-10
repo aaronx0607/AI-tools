@@ -29,29 +29,18 @@ const t = useTranslations(lang);
 
   const searchInput = document.getElementById('search-input');
   const searchResults = document.getElementById('search-results');
-  // 获取当前语言
   const lang = document.documentElement.lang || 'en';
-  console.log('SearchBar - Current language:', lang);
-  console.log('SearchBar - Document language attribute:', document.documentElement.lang);
-  console.log('SearchBar - URL path:', window.location.pathname);
 
   // 动态获取工具数据
   async function getTools() {
     try {
-      // 传递当前语言参数
-      const apiUrl = `/api/tools.json?lang=${lang}`;
-      console.log('SearchBar - Fetching tools from:', apiUrl);
-
-      const response = await fetch(apiUrl);
+      const response = await fetch('/api/tools.json');
       if (response.ok) {
-        const data = await response.json();
-        console.log(`SearchBar - Received ${data.length} tools:`, data);
-        return data;
+        return await response.json();
       }
-      console.log('SearchBar - API response not OK');
       return [];
     } catch (error) {
-      console.error('SearchBar - Error fetching tools:', error);
+      console.error('Error fetching tools:', error);
       return [];
     }
   }
@@ -86,19 +75,8 @@ const t = useTranslations(lang);
               <div class="text-sm text-dark-300">${result.item.description}</div>
             </a>
           `).join('') : `
-            <div class="p-4 text-dark-300">${getNoResultsText()}</div>
+            <div class="p-4 text-dark-300">No results found</div>
           `;
-
-        // 获取当前语言的“未找到结果”文本
-        function getNoResultsText() {
-          const translations: Record<string, string> = {
-            'en': 'No results found',
-            'es': 'No se encontraron resultados',
-            'fr': 'Aucun résultat trouvé',
-            'zh': '未找到结果'
-          };
-          return translations[lang] || translations['en'];
-        }
 
         searchResults.classList.remove('hidden');
       }

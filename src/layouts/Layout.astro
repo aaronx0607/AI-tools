@@ -4,7 +4,6 @@ import LanguagePicker from '../components/LanguagePicker.astro';
 import Navigation from '../components/Navigation.astro';
 import Sidebar from '../components/Sidebar.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
-import { ui } from '../i18n/ui';
 
 interface Props {
   title: string;
@@ -39,12 +38,6 @@ const t = useTranslations(lang);
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
-
-    <!-- 多语言翻译文本 -->
-    <meta name="i18n:search.no-results:en" content={ui.en['search.no-results']} />
-    <meta name="i18n:search.no-results:es" content={ui.es['search.no-results']} />
-    <meta name="i18n:search.no-results:fr" content={ui.fr['search.no-results']} />
-    <meta name="i18n:search.no-results:zh" content={ui.zh['search.no-results']} />
 
     <ViewTransitions />
   </head>

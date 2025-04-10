@@ -23,10 +23,9 @@ const langToolsMap = {
 
 // 获取当前语言的工具文件
 const lang = getLangFromUrl(Astro.url);
-// 严格按照当前语言筛选，不再回退到英文
-let toolFiles = langToolsMap[lang] || [];
+let toolFiles = langToolsMap[lang] || enTools;
 
-const allTools = toolFiles.map((tool: any) => ({
+const allTools = toolFiles.map(tool => ({
   id: tool.frontmatter.id,
   name: tool.frontmatter.name,
   description: tool.frontmatter.description,

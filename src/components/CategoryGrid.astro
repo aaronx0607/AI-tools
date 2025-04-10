@@ -25,8 +25,7 @@ const langToolsMap = {
 const lang = getLangFromUrl(Astro.url);
 
 // 获取当前语言的工具文件
-// 严格按照当前语言筛选，不再回退到英文
-let toolFiles = langToolsMap[lang] || [];
+let toolFiles = langToolsMap[lang] || enTools;
 
 // 计算每个分类的工具数量
 const categoryCounts: Record<string, number> = {};
