@@ -48,7 +48,7 @@ const t = useTranslations(lang);
       <div class="flex items-center gap-3 mb-3">
         {tool.icon && (
           <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-dark-700 rounded-lg overflow-hidden">
-            {tool.icon.startsWith('http') ? (
+            {tool.icon.startsWith('http') || tool.icon.startsWith('/') ? (
               <img src={tool.icon} alt={`${tool.name} icon`} class="w-full h-full object-cover" />
             ) : (
               <span class="text-2xl">{tool.icon}</span>

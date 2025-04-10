@@ -102,7 +102,7 @@ const content = await tool.compiledContent();
         <div class="flex items-center gap-4 mb-6 non-prose">
           {tool.frontmatter.icon && (
             <div class="flex-shrink-0 w-16 h-16 flex items-center justify-center bg-dark-700 rounded-lg overflow-hidden">
-              {typeof tool.frontmatter.icon === 'string' && tool.frontmatter.icon.startsWith('http') ? (
+              {typeof tool.frontmatter.icon === 'string' && (tool.frontmatter.icon.startsWith('http') || tool.frontmatter.icon.startsWith('/')) ? (
                 <img src={tool.frontmatter.icon} alt={`${tool.frontmatter.name} icon`} class="w-full h-full object-cover" />
               ) : (
                 <span class="text-4xl">{tool.frontmatter.icon}</span>
@@ -135,7 +135,7 @@ const content = await tool.compiledContent();
       {tool.frontmatter.icon && (
         <div class="flex justify-center mb-4">
           <div class="w-16 h-16 flex items-center justify-center bg-dark-700 rounded-lg overflow-hidden">
-            {typeof tool.frontmatter.icon === 'string' && tool.frontmatter.icon.startsWith('http') ? (
+            {typeof tool.frontmatter.icon === 'string' && (tool.frontmatter.icon.startsWith('http') || tool.frontmatter.icon.startsWith('/')) ? (
               <img src={tool.frontmatter.icon} alt={`${tool.frontmatter.name} icon`} class="w-full h-full object-cover" />
             ) : (
               <span class="text-4xl">{tool.frontmatter.icon}</span>
@@ -176,11 +176,11 @@ const content = await tool.compiledContent();
         </div>
         <div>
           <div class="text-dark-400 mb-1">{t('tool.pricing')}</div>
-          <div class="space-y-1">
+          <div class="space-y-2">
             {tool.frontmatter.pricing && Object.entries(tool.frontmatter.pricing).map(([plan, price]) => (
-              <div class="flex justify-between">
-                <span class="capitalize">{t(`tool.plans.${plan}`)}</span>
-                <span>{price}</span>
+              <div class="flex flex-col">
+                <span class="capitalize font-medium">{t(`tool.plans.${plan}`)}</span>
+                <span class="text-dark-300 text-sm break-words">{price}</span>
               </div>
             ))}
           </div>
