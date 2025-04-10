@@ -67,7 +67,7 @@ features:
 | 字段 | 描述 | 示例 |
 |------|------|------|
 | `website` | 官方网站URL | `https://chat.openai.com` |
-| `icon` | 工具图标（使用emoji或Unicode字符） | `🤖` |
+| `icon` | 工具图标（可使用emoji、Unicode字符或图片URL） | `🤖` 或 `https://example.com/icon.png` |
 | `tags` | 标签数组（用于搜索和分类） | `[AI对话, 文本生成, OpenAI]` |
 | `pricing` | 价格计划（键值对） | 见示例 |
 | `features` | 主要功能列表 | 见示例 |
