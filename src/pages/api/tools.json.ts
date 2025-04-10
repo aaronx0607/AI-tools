@@ -1,18 +1,35 @@
 import type { APIRoute } from 'astro';
 
-export const GET: APIRoute = async () => {
+export const GET: APIRoute = async ({ request, url }) => {
   try {
-    // 从 content/tools/en 目录获取所有工具
-    const toolFiles = await import.meta.glob('../../content/tools/en/*.md', { eager: true });
+    // 获取请求的语言
+    const lang = url.searchParams.get('lang') || 'en';
+
+    // 支持的语言列表
+    const supportedLangs = ['en', 'es', 'fr', 'zh'];
+
+    // 验证语言是否支持
+    const validLang = supportedLangs.includes(lang) ? lang : 'en';
+
+    // 动态构建导入路径
+    const toolFiles = await import.meta.glob(`../../content/tools/${validLang}/*.md`, { eager: true });
+
+    // 如果指定语言的工具为空，回退到英文
+    let finalToolFiles = toolFiles;
+    if (Object.keys(toolFiles).length === 0 && validLang !== 'en') {
+      console.log(`No tools found for language ${validLang}, falling back to English`);
+      finalToolFiles = await import.meta.glob('../../content/tools/en/*.md', { eager: true });
+    }
 
     // 提取工具数据
-    const tools = Object.values(toolFiles).map((tool: any) => ({
+    const tools = Object.values(finalToolFiles).map((tool: any) => ({
       id: tool.frontmatter.id,
       name: tool.frontmatter.name,
       description: tool.frontmatter.description,
       category: tool.frontmatter.category,
       rating: tool.frontmatter.rating,
-      reviews: tool.frontmatter.reviews
+      reviews: tool.frontmatter.reviews,
+      lang: validLang // 添加语言标记
     }));
 
     return new Response(JSON.stringify(tools), {

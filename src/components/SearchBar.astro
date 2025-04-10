@@ -34,7 +34,8 @@ const t = useTranslations(lang);
   // 动态获取工具数据
   async function getTools() {
     try {
-      const response = await fetch('/api/tools.json');
+      // 传递当前语言作为查询参数
+      const response = await fetch(`/api/tools.json?lang=${lang}`);
       if (response.ok) {
         return await response.json();
       }
@@ -46,6 +47,20 @@ const t = useTranslations(lang);
   }
 
   let tools: any[] = [];
+
+  // 获取当前语言的“无结果”文本
+  function getNoResultsText() {
+    // 从服务器获取翻译文本
+    const translations = {
+      en: document.querySelector('meta[name="i18n:search.no-results:en"]')?.getAttribute('content') || 'No results found',
+      es: document.querySelector('meta[name="i18n:search.no-results:es"]')?.getAttribute('content') || 'No se encontraron resultados',
+      fr: document.querySelector('meta[name="i18n:search.no-results:fr"]')?.getAttribute('content') || 'Aucun résultat trouvé',
+      zh: document.querySelector('meta[name="i18n:search.no-results:zh"]')?.getAttribute('content') || '未找到结果'
+    };
+
+    // 返回当前语言的文本，如果不存在则返回英文
+    return translations[lang as keyof typeof translations] || translations.en;
+  }
 
   // 初始化搜索功能
   function initSearch() {
@@ -75,7 +90,7 @@ const t = useTranslations(lang);
               <div class="text-sm text-dark-300">${result.item.description}</div>
             </a>
           `).join('') : `
-            <div class="p-4 text-dark-300">No results found</div>
+            <div class="p-4 text-dark-300">${getNoResultsText()}</div>
           `;
 
         searchResults.classList.remove('hidden');
