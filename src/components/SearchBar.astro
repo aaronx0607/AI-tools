@@ -27,14 +27,15 @@ const t = useTranslations(lang);
 <script>
   import Fuse from 'fuse.js';
 
-  const searchInput = document.getElementById('search-input');
-  const searchResults = document.getElementById('search-results');
-  const lang = document.documentElement.lang || 'en';
+  // 使用let而非const，因为我们需要在路由变化时重新赋值
+  let searchInput = document.getElementById('search-input');
+  let searchResults = document.getElementById('search-results');
+  let lang = document.documentElement.lang || 'en';
 
   // 动态获取工具数据
   async function getTools() {
     try {
-      const response = await fetch('/api/tools.json');
+      const response = await fetch(`/api/tools.json?lang=${lang}`);
       if (response.ok) {
         return await response.json();
       }
@@ -94,6 +95,28 @@ const t = useTranslations(lang);
     const container = document.getElementById('search-container');
     if (container && !container.contains(e.target as Node)) {
       if (searchResults) searchResults.classList.add('hidden');
+    }
+  });
+
+  // 监听路由变化，重新初始化搜索
+  document.addEventListener('astro:page-load', () => {
+    // 重新获取元素引用，因为页面可能已经重新加载
+    const searchInputRefresh = document.getElementById('search-input');
+    const searchResultsRefresh = document.getElementById('search-results');
+
+    if (searchInputRefresh && searchResultsRefresh) {
+      // 更新引用
+      searchInput = searchInputRefresh;
+      searchResults = searchResultsRefresh;
+
+      // 重新获取当前语言
+      lang = document.documentElement.lang || 'en';
+
+      // 重新获取工具数据并初始化搜索
+      getTools().then(data => {
+        tools = data;
+        initSearch();
+      });
     }
   });
 </script>

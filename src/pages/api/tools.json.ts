@@ -1,12 +1,26 @@
 import type { APIRoute } from 'astro';
 
-export const GET: APIRoute = async () => {
+export const GET: APIRoute = async ({ request }) => {
   try {
-    // 从 content/tools/en 目录获取所有工具
-    const toolFiles = await import.meta.glob('@content/tools/en/*.md', { eager: true });
+    // 从URL获取语言参数
+    const url = new URL(request.url);
+    const lang = url.searchParams.get('lang') || 'en';
+
+    // 根据语言获取对应的工具文件
+    const toolFiles = import.meta.glob('@content/tools/*/*.md', { eager: true });
+
+    // 筛选当前语言的工具文件
+    const langToolFiles = Object.entries(toolFiles)
+      .filter(([path]) => path.includes(`/tools/${lang}/`))
+      .map(([_, content]) => content);
+
+    // 如果当前语言没有工具文件，则使用英文版本
+    const filesToUse = langToolFiles.length > 0 ? langToolFiles : Object.entries(toolFiles)
+      .filter(([path]) => path.includes('/tools/en/'))
+      .map(([_, content]) => content);
 
     // 提取工具数据
-    const tools = Object.values(toolFiles).map((tool: any) => ({
+    const tools = filesToUse.map((tool: any) => ({
       id: tool.frontmatter.id,
       name: tool.frontmatter.name,
       description: tool.frontmatter.description,
