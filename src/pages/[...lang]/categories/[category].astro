@@ -56,7 +56,8 @@ const langToolsMap = {
 };
 
 // 获取当前语言的工具文件
-let toolFiles = langToolsMap[lang] || enTools;
+// 严格按照当前语言筛选，不再回退到英文
+let toolFiles = langToolsMap[lang] || [];
 
 // 筛选当前分类的工具
 const categoryTools = toolFiles

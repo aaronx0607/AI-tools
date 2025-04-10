@@ -25,12 +25,8 @@ export const GET: APIRoute = async ({ request, url }) => {
       toolFiles = await import.meta.glob('../../content/tools/zh/*.md', { eager: true });
     }
 
-    // 如果指定语言的工具为空，回退到英文
+    // 不再回退到英文，而是严格按照当前语言筛选
     let finalToolFiles = toolFiles;
-    if (Object.keys(toolFiles).length === 0 && validLang !== 'en') {
-      console.log(`No tools found for language ${validLang}, falling back to English`);
-      finalToolFiles = await import.meta.glob('../../content/tools/en/*.md', { eager: true });
-    }
 
     // 提取工具数据
     const tools = Object.values(finalToolFiles).map((tool: any) => ({

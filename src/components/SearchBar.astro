@@ -58,8 +58,14 @@ const t = useTranslations(lang);
       zh: document.querySelector('meta[name="i18n:search.no-results:zh"]')?.getAttribute('content') || '未找到结果'
     };
 
-    // 返回当前语言的文本，如果不存在则返回英文
-    return translations[lang as keyof typeof translations] || translations.en;
+    // 严格返回当前语言的文本，不再回退到英文
+    const currentLangText = translations[lang as keyof typeof translations];
+    if (currentLangText) {
+      return currentLangText;
+    }
+
+    // 如果当前语言没有翻译，才使用英文
+    return translations.en;
   }
 
   // 初始化搜索功能
