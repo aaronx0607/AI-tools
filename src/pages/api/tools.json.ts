@@ -25,7 +25,8 @@ export const GET: APIRoute = async ({ request, url }) => {
       toolFiles = await import.meta.glob('../../content/tools/zh/*.md', { eager: true });
     }
 
-    // 不再回退到英文，而是严格按照当前语言筛选
+    // 不再回退到英文，而是只返回当前语言的工具
+    // 即使当前语言没有工具，也返回空数组
     let finalToolFiles = toolFiles;
 
     // 提取工具数据
