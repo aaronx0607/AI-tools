@@ -1,5 +1,5 @@
 ---
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { getLangFromUrl, useTranslations } from '@i18n/utils';
 
 const categories = [
   { id: 'text-generation', name: 'categories.text-generation', icon: '📝' },
@@ -41,7 +41,7 @@ const prefix = lang === 'en' ? '' : `/${lang}`;
             }`}
           >
             <span class="mr-3">{category.icon}</span>
-            {t(category.name as keyof typeof import('../i18n/ui').ui.en)}
+            {t(category.name as keyof typeof import('@i18n/ui').ui.en)}
           </a>
         </li>
       ))}

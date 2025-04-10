@@ -1,6 +1,6 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
-import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
+import Layout from '@layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '@i18n/utils';
 import { marked } from 'marked';
 
 export async function getStaticPaths() {
@@ -8,10 +8,10 @@ export async function getStaticPaths() {
   const allPaths = [];
 
   // 使用import.meta.glob静态导入所有语言的工具文件
-  const enToolsModules = import.meta.glob('../../../content/tools/en/*.md', { eager: true });
-  const esToolsModules = import.meta.glob('../../../content/tools/es/*.md', { eager: true });
-  const frToolsModules = import.meta.glob('../../../content/tools/fr/*.md', { eager: true });
-  const zhToolsModules = import.meta.glob('../../../content/tools/zh/*.md', { eager: true });
+  const enToolsModules = import.meta.glob('@content/tools/en/*.md', { eager: true });
+  const esToolsModules = import.meta.glob('@content/tools/es/*.md', { eager: true });
+  const frToolsModules = import.meta.glob('@content/tools/fr/*.md', { eager: true });
+  const zhToolsModules = import.meta.glob('@content/tools/zh/*.md', { eager: true });
 
   // 将模块转换为工具数组
   const enTools = Object.values(enToolsModules);

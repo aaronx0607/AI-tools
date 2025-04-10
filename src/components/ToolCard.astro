@@ -1,5 +1,5 @@
 ---
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { getLangFromUrl, useTranslations } from '@i18n/utils';
 
 export interface ToolProps {
   id: string;
@@ -33,7 +33,7 @@ const t = useTranslations(lang);
       href={lang === 'en' ? `/categories/${tool.category}` : `/${lang}/categories/${tool.category}`}
       class="text-sm text-indigo-400 hover:text-indigo-300"
     >
-      {t(`categories.${tool.category}` as keyof typeof import('../i18n/ui').ui.en)}
+      {t(`categories.${tool.category}` as keyof typeof import('@i18n/ui').ui.en)}
     </a>
   </div>
   <div class="flex flex-wrap gap-2 mt-auto pt-2">

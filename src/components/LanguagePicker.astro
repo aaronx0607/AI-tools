@@ -1,6 +1,6 @@
 ---
-import { languages } from '../i18n/ui';
-import { getLangFromUrl } from '../i18n/utils';
+import { languages } from '@i18n/ui';
+import { getLangFromUrl } from '@i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const path = Astro.url.pathname.replace(`/${lang}`, '') || '/';
@@ -32,7 +32,7 @@ const flagEmojis = {
             href={href}
             class={`block px-4 py-2 text-dark-50 hover:bg-dark-700 ${code === lang ? 'bg-dark-700' : ''}`}
           >
-            <span class="text-xl mr-2">{flagEmojis[code]}</span>
+            <span class="text-xl mr-2">{flagEmojis[code as keyof typeof flagEmojis]}</span>
             <span>{name}</span>
           </a>
         );
@@ -51,7 +51,7 @@ const flagEmojis = {
     if (mobileLanguageButton && mobileLanguageDropdown) {
       // 移除旧的事件监听器，防止重复绑定
       const newButton = mobileLanguageButton.cloneNode(true);
-      mobileLanguageButton.parentNode.replaceChild(newButton, mobileLanguageButton);
+      mobileLanguageButton.parentNode?.replaceChild(newButton, mobileLanguageButton);
 
       // 添加新的事件监听器
       newButton.addEventListener('click', function(e) {
@@ -60,8 +60,8 @@ const flagEmojis = {
       });
 
       // 点击其他地方关闭下拉菜单
-      const handleOutsideClick = function(e) {
-        if (!newButton.contains(e.target) && !mobileLanguageDropdown.contains(e.target)) {
+      const handleOutsideClick = function(e: MouseEvent) {
+        if (!newButton.contains(e.target as Node) && !mobileLanguageDropdown.contains(e.target as Node)) {
           mobileLanguageDropdown.classList.add('hidden');
         }
       };

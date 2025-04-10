@@ -3,7 +3,7 @@ import type { APIRoute } from 'astro';
 export const GET: APIRoute = async () => {
   try {
     // 从 content/tools/en 目录获取所有工具
-    const toolFiles = await import.meta.glob('../../content/tools/en/*.md', { eager: true });
+    const toolFiles = await import.meta.glob('@content/tools/en/*.md', { eager: true });
 
     // 提取工具数据
     const tools = Object.values(toolFiles).map((tool: any) => ({
