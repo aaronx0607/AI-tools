@@ -11,8 +11,19 @@ export const GET: APIRoute = async ({ request, url }) => {
     // 验证语言是否支持
     const validLang = supportedLangs.includes(lang) ? lang : 'en';
 
-    // 动态构建导入路径
-    const toolFiles = await import.meta.glob(`../../content/tools/${validLang}/*.md`, { eager: true });
+    // 使用静态导入路径
+    let toolFiles: Record<string, any> = {};
+
+    // 根据语言选择相应的工具文件
+    if (validLang === 'en') {
+      toolFiles = await import.meta.glob('../../content/tools/en/*.md', { eager: true });
+    } else if (validLang === 'es') {
+      toolFiles = await import.meta.glob('../../content/tools/es/*.md', { eager: true });
+    } else if (validLang === 'fr') {
+      toolFiles = await import.meta.glob('../../content/tools/fr/*.md', { eager: true });
+    } else if (validLang === 'zh') {
+      toolFiles = await import.meta.glob('../../content/tools/zh/*.md', { eager: true });
+    }
 
     // 如果指定语言的工具为空，回退到英文
     let finalToolFiles = toolFiles;

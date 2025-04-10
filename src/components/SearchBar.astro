@@ -83,7 +83,7 @@ const t = useTranslations(lang);
       if (searchResults) {
         searchResults.innerHTML = results.length ? results
           .slice(0, 5)
-          .map(result => `
+          .map((result: any) => `
             <a href="/${lang === 'en' ? '' : lang}/tools/${result.item.id}"
                class="block p-4 hover:bg-dark-700">
               <div class="font-semibold text-dark-50">${result.item.name}</div>
