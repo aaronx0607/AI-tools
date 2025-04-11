@@ -70,6 +70,16 @@ const { tool } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
+// 格式化日期
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  return new Intl.DateTimeFormat(lang === 'en' ? 'en-US' : lang === 'es' ? 'es-ES' : lang === 'fr' ? 'fr-FR' : 'zh-CN', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }).format(date);
+};
+
 const content = await tool.compiledContent();
 ---
 
@@ -109,7 +119,7 @@ const content = await tool.compiledContent();
               )}
             </div>
           )}
-          <h1 class="text-3xl font-bold m-0">{tool.frontmatter.name}</h1>
+          <h2 class="text-3xl font-bold m-0">{tool.frontmatter.name}</h2>
         </div>
 
         {tool.frontmatter.tags && (
@@ -168,6 +178,12 @@ const content = await tool.compiledContent();
                 );
               })}
             </div>
+          </div>
+        )}
+        {tool.frontmatter.publishedAt && (
+          <div>
+            <div class="text-dark-400 mb-1">{t('tool.publishedAt')}</div>
+            <div>{formatDate(tool.frontmatter.publishedAt)}</div>
           </div>
         )}
         <div>
