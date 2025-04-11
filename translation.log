@@ -1,0 +1,143 @@
+2025-04-11 22:55:46,181 - INFO - 正在扫描源目录: src/content/blog/en
+2025-04-11 22:55:46,181 - INFO - 找到 9 个要翻译的文件
+2025-04-11 22:55:46,181 - INFO - 对长文档使用 4000 个令牌的块大小
+2025-04-11 22:55:46,216 - INFO - 文件 augment-code-vs-windsurf.md 较大 (4442 估计令牌),正在分块
+2025-04-11 22:55:46,216 - INFO - 文件 augment-code-vs-windsurf.md 较大 (4442 估计令牌),正在分块
+2025-04-11 22:55:46,216 - INFO - 文件 augment-code-vs-windsurf.md 较大 (4442 估计令牌),正在分块
+2025-04-11 22:55:46,216 - INFO - 分成了 1 块
+2025-04-11 22:55:46,217 - INFO - 分成了 1 块
+2025-04-11 22:55:46,217 - INFO - 分成了 1 块
+2025-04-11 22:55:46,217 - INFO - 正在翻译 augment-code-vs-windsurf.md 的第 1/1 块
+2025-04-11 22:55:46,217 - INFO - 正在翻译 augment-code-vs-windsurf.md 的第 1/1 块
+2025-04-11 22:55:46,217 - INFO - 正在翻译 augment-code-vs-windsurf.md 的第 1/1 块
+2025-04-11 22:55:47,655 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-04-11 22:55:47,657 - ERROR - 翻译块时出错: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-your-********here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-04-11 22:55:47,657 - ERROR - 将 src/content/blog/en/augment-code-vs-windsurf.md 翻译成 es 时出错: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-your-********here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-04-11 22:55:47,658 - ERROR - 无法将 src/content/blog/en/augment-code-vs-windsurf.md 翻译成 es: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-your-********here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-04-11 22:55:47,659 - INFO - 文件 cline-vs-roo-code.md 较大 (5802 估计令牌),正在分块
+2025-04-11 22:55:47,659 - INFO - 分成了 1 块
+2025-04-11 22:55:47,660 - INFO - 正在翻译 cline-vs-roo-code.md 的第 1/1 块
+2025-04-11 22:55:48,968 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-04-11 22:55:48,969 - ERROR - 翻译块时出错: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-your-********here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-04-11 22:55:48,969 - ERROR - 将 src/content/blog/en/augment-code-vs-windsurf.md 翻译成 fr 时出错: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-your-********here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-04-11 22:55:48,970 - ERROR - 无法将 src/content/blog/en/augment-code-vs-windsurf.md 翻译成 fr: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-your-********here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-04-11 22:55:48,971 - INFO - 文件 cline-vs-roo-code.md 较大 (5802 估计令牌),正在分块
+2025-04-11 22:55:48,971 - INFO - 分成了 1 块
+2025-04-11 22:55:48,971 - INFO - 正在翻译 cline-vs-roo-code.md 的第 1/1 块
+2025-04-11 22:55:49,233 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-04-11 22:55:49,234 - ERROR - 翻译块时出错: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-your-********here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-04-11 22:55:49,234 - ERROR - 将 src/content/blog/en/augment-code-vs-windsurf.md 翻译成 zh 时出错: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-your-********here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-04-11 22:55:49,235 - ERROR - 无法将 src/content/blog/en/augment-code-vs-windsurf.md 翻译成 zh: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-your-********here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-04-11 22:55:49,236 - INFO - 文件 cline-vs-roo-code.md 较大 (5802 估计令牌),正在分块
+2025-04-11 22:55:49,237 - INFO - 分成了 1 块
+2025-04-11 22:55:49,237 - INFO - 正在翻译 cline-vs-roo-code.md 的第 1/1 块
+2025-04-11 22:55:49,282 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-04-11 22:55:49,283 - ERROR - 翻译块时出错: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-your-********here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-04-11 22:55:49,283 - ERROR - 将 src/content/blog/en/cline-vs-roo-code.md 翻译成 fr 时出错: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-your-********here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-04-11 22:55:49,284 - INFO - 文件 augment-code-vs-cursor.md 较大 (5068 估计令牌),正在分块
+2025-04-11 22:55:49,285 - INFO - 分成了 1 块
+2025-04-11 22:55:49,285 - INFO - 正在翻译 augment-code-vs-cursor.md 的第 1/1 块
+2025-04-11 22:55:49,341 - ERROR - 无法将 src/content/blog/en/cline-vs-roo-code.md 翻译成 fr: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-your-********here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-04-11 22:55:50,491 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-04-11 22:55:50,492 - ERROR - 翻译块时出错: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-your-********here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-04-11 22:55:50,493 - ERROR - 将 src/content/blog/en/cline-vs-roo-code.md 翻译成 es 时出错: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-your-********here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-04-11 22:55:50,493 - ERROR - 无法将 src/content/blog/en/cline-vs-roo-code.md 翻译成 es: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-your-********here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-04-11 22:55:50,494 - INFO - 文件 augment-code-vs-cursor.md 较大 (5068 估计令牌),正在分块
+2025-04-11 22:55:50,495 - INFO - 分成了 1 块
+2025-04-11 22:55:50,495 - INFO - 正在翻译 augment-code-vs-cursor.md 的第 1/1 块
+2025-04-11 22:55:50,671 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-04-11 22:55:50,672 - ERROR - 翻译块时出错: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-your-********here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-04-11 22:55:50,672 - ERROR - 将 src/content/blog/en/augment-code-vs-cursor.md 翻译成 fr 时出错: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-your-********here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-04-11 22:55:50,673 - ERROR - 无法将 src/content/blog/en/augment-code-vs-cursor.md 翻译成 fr: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-your-********here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-04-11 22:55:50,673 - INFO - 文件 augment-code-vs-cursor.md 较大 (5068 估计令牌),正在分块
+2025-04-11 22:55:50,674 - INFO - 分成了 1 块
+2025-04-11 22:55:50,674 - INFO - 正在翻译 augment-code-vs-cursor.md 的第 1/1 块
+2025-04-11 22:55:50,800 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-04-11 22:55:50,801 - ERROR - 翻译块时出错: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-your-********here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-04-11 22:55:50,801 - ERROR - 将 src/content/blog/en/cline-vs-roo-code.md 翻译成 zh 时出错: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-your-********here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-04-11 22:55:50,801 - ERROR - 无法将 src/content/blog/en/cline-vs-roo-code.md 翻译成 zh: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-your-********here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-04-11 22:55:51,947 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-04-11 22:55:51,948 - ERROR - 翻译块时出错: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-your-********here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-04-11 22:55:51,949 - ERROR - 将 src/content/blog/en/augment-code-vs-cursor.md 翻译成 zh 时出错: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-your-********here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-04-11 22:55:51,949 - ERROR - 无法将 src/content/blog/en/augment-code-vs-cursor.md 翻译成 zh: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-your-********here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-04-11 22:55:52,075 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-04-11 22:55:52,076 - ERROR - 翻译块时出错: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-your-********here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-04-11 22:55:52,076 - ERROR - 将 src/content/blog/en/augment-code-vs-cursor.md 翻译成 es 时出错: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-your-********here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-04-11 22:55:52,077 - ERROR - 无法将 src/content/blog/en/augment-code-vs-cursor.md 翻译成 es: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-your-********here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-04-11 22:55:52,180 - INFO - 
+翻译完成!
+2025-04-11 22:55:52,180 - INFO - 成功翻译: 0 个文件
+2025-04-11 22:55:52,180 - INFO - 翻译失败: 9 个文件
+2025-04-11 22:55:52,180 - INFO - 查看日志文件以了解失败翻译的详细信息。
+2025-04-11 22:59:14,360 - INFO - 正在扫描源目录: src/content/blog/en
+2025-04-11 22:59:14,361 - INFO - 找到 9 个要翻译的文件
+2025-04-11 22:59:14,361 - INFO - 对长文档使用 4000 个令牌的块大小
+2025-04-11 22:59:14,361 - INFO - 使用模型: openai/gpt-4o-mini
+2025-04-11 22:59:14,377 - INFO - 文件 augment-code-vs-windsurf.md 较大 (4442 估计令牌),正在分块
+2025-04-11 22:59:14,377 - INFO - 文件 augment-code-vs-windsurf.md 较大 (4442 估计令牌),正在分块
+2025-04-11 22:59:14,377 - INFO - 分成了 1 块
+2025-04-11 22:59:14,377 - INFO - 文件 augment-code-vs-windsurf.md 较大 (4442 估计令牌),正在分块
+2025-04-11 22:59:14,377 - INFO - 分成了 1 块
+2025-04-11 22:59:14,377 - INFO - 正在翻译 augment-code-vs-windsurf.md 的第 1/1 块
+2025-04-11 22:59:14,377 - INFO - 分成了 1 块
+2025-04-11 22:59:14,378 - INFO - 正在翻译 augment-code-vs-windsurf.md 的第 1/1 块
+2025-04-11 22:59:14,378 - INFO - 正在翻译 augment-code-vs-windsurf.md 的第 1/1 块
+2025-04-11 22:59:22,379 - ERROR - 翻译块时出错: HTTPSConnectionPool(host='openrouter.ai', port=443): Max retries exceeded with url: /api/v1/chat/completions (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:997)')))
+2025-04-11 22:59:22,380 - ERROR - 将 src/content/blog/en/augment-code-vs-windsurf.md 翻译成 es 时出错: local variable 'response' referenced before assignment
+2025-04-11 22:59:22,380 - ERROR - 无法将 src/content/blog/en/augment-code-vs-windsurf.md 翻译成 es: local variable 'response' referenced before assignment
+2025-04-11 22:59:22,382 - INFO - 文件 cline-vs-roo-code.md 较大 (5802 估计令牌),正在分块
+2025-04-11 22:59:22,382 - INFO - 分成了 1 块
+2025-04-11 22:59:22,383 - INFO - 正在翻译 cline-vs-roo-code.md 的第 1/1 块
+2025-04-11 22:59:23,662 - ERROR - 翻译块时出错: HTTPSConnectionPool(host='openrouter.ai', port=443): Max retries exceeded with url: /api/v1/chat/completions (Caused by ProxyError('Cannot connect to proxy.', ConnectionResetError(54, 'Connection reset by peer')))
+2025-04-11 22:59:23,662 - ERROR - 将 src/content/blog/en/augment-code-vs-windsurf.md 翻译成 zh 时出错: local variable 'response' referenced before assignment
+2025-04-11 22:59:23,663 - ERROR - 无法将 src/content/blog/en/augment-code-vs-windsurf.md 翻译成 zh: local variable 'response' referenced before assignment
+2025-04-11 22:59:23,663 - INFO - 文件 cline-vs-roo-code.md 较大 (5802 估计令牌),正在分块
+2025-04-11 22:59:23,664 - INFO - 分成了 1 块
+2025-04-11 22:59:23,664 - INFO - 正在翻译 cline-vs-roo-code.md 的第 1/1 块
+2025-04-11 23:00:49,756 - INFO - 成功将 augment-code-vs-windsurf.md 翻译成 fr
+2025-04-11 23:00:49,757 - INFO - 文件 cline-vs-roo-code.md 较大 (5802 估计令牌),正在分块
+2025-04-11 23:00:49,758 - INFO - 分成了 1 块
+2025-04-11 23:00:49,758 - INFO - 正在翻译 cline-vs-roo-code.md 的第 1/1 块
+2025-04-11 23:01:03,915 - INFO - 成功将 cline-vs-roo-code.md 翻译成 es
+2025-04-11 23:01:03,917 - INFO - 文件 augment-code-vs-cursor.md 较大 (5068 估计令牌),正在分块
+2025-04-11 23:01:03,917 - INFO - 分成了 1 块
+2025-04-11 23:01:03,917 - INFO - 正在翻译 augment-code-vs-cursor.md 的第 1/1 块
+2025-04-11 23:01:15,415 - INFO - 成功将 cline-vs-roo-code.md 翻译成 fr
+2025-04-11 23:01:15,416 - INFO - 文件 augment-code-vs-cursor.md 较大 (5068 估计令牌),正在分块
+2025-04-11 23:01:15,417 - INFO - 分成了 1 块
+2025-04-11 23:01:15,417 - INFO - 正在翻译 augment-code-vs-cursor.md 的第 1/1 块
+2025-04-11 23:02:12,318 - INFO - 成功将 cline-vs-roo-code.md 翻译成 zh
+2025-04-11 23:02:12,320 - INFO - 文件 augment-code-vs-cursor.md 较大 (5068 估计令牌),正在分块
+2025-04-11 23:02:12,320 - INFO - 分成了 1 块
+2025-04-11 23:02:12,320 - INFO - 正在翻译 augment-code-vs-cursor.md 的第 1/1 块
+2025-04-11 23:02:37,107 - INFO - 成功将 augment-code-vs-cursor.md 翻译成 es
+2025-04-11 23:02:39,722 - INFO - 成功将 augment-code-vs-cursor.md 翻译成 fr
+2025-04-11 23:03:29,888 - INFO - 成功将 augment-code-vs-cursor.md 翻译成 zh
+2025-04-11 23:03:29,992 - INFO - 
+翻译完成!
+2025-04-11 23:03:29,992 - INFO - 成功翻译: 7 个文件
+2025-04-11 23:03:29,992 - INFO - 翻译失败: 2 个文件
+2025-04-11 23:03:29,993 - INFO - 查看日志文件以了解失败翻译的详细信息。
+2025-04-11 23:03:46,587 - INFO - 正在扫描源目录: src/content/blog/en
+2025-04-11 23:03:46,588 - INFO - 跳过 src/content/blog/fr/augment-code-vs-windsurf.md (已存在)
+2025-04-11 23:03:46,588 - INFO - 跳过 src/content/blog/fr/cline-vs-roo-code.md (已存在)
+2025-04-11 23:03:46,588 - INFO - 跳过 src/content/blog/es/cline-vs-roo-code.md (已存在)
+2025-04-11 23:03:46,588 - INFO - 跳过 src/content/blog/zh/cline-vs-roo-code.md (已存在)
+2025-04-11 23:03:46,588 - INFO - 跳过 src/content/blog/fr/augment-code-vs-cursor.md (已存在)
+2025-04-11 23:03:46,588 - INFO - 跳过 src/content/blog/es/augment-code-vs-cursor.md (已存在)
+2025-04-11 23:03:46,588 - INFO - 跳过 src/content/blog/zh/augment-code-vs-cursor.md (已存在)
+2025-04-11 23:03:46,588 - INFO - 找到 2 个要翻译的文件
+2025-04-11 23:03:46,588 - INFO - 对长文档使用 4000 个令牌的块大小
+2025-04-11 23:03:46,588 - INFO - 使用模型: openai/gpt-4o-mini
+2025-04-11 23:03:46,603 - INFO - 文件 augment-code-vs-windsurf.md 较大 (4442 估计令牌),正在分块
+2025-04-11 23:03:46,603 - INFO - 文件 augment-code-vs-windsurf.md 较大 (4442 估计令牌),正在分块
+2025-04-11 23:03:46,603 - INFO - 分成了 1 块
+2025-04-11 23:03:46,603 - INFO - 分成了 1 块
+2025-04-11 23:03:46,603 - INFO - 正在翻译 augment-code-vs-windsurf.md 的第 1/1 块
+2025-04-11 23:03:46,603 - INFO - 正在翻译 augment-code-vs-windsurf.md 的第 1/1 块
+2025-04-11 23:05:05,421 - INFO - 成功将 augment-code-vs-windsurf.md 翻译成 es
+2025-04-11 23:05:09,862 - INFO - 成功将 augment-code-vs-windsurf.md 翻译成 zh
+2025-04-11 23:05:09,969 - INFO - 
+翻译完成!
+2025-04-11 23:05:09,969 - INFO - 成功翻译: 2 个文件
+2025-04-11 23:05:09,969 - INFO - 翻译失败: 0 个文件
