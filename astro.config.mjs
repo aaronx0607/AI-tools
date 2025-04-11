@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 import react from '@astrojs/react';
+import robotsTxt from 'astro-robots-txt';
 import { fileURLToPath } from 'url';
 import path from 'path';
 
@@ -22,7 +23,8 @@ export default defineConfig({
         }
       }
     }),
-    react()
+    react(),
+    robotsTxt()
   ],
   i18n: {
     defaultLocale: 'en',
