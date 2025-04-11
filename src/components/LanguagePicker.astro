@@ -38,10 +38,11 @@ const flagEmojis = {
         return (
           <a
             href={href}
-            class={`block px-4 py-2 text-dark-50 hover:bg-dark-700 ${code === lang ? 'bg-dark-700' : ''}`}
+            class={`flex items-center justify-center p-3 text-dark-50 hover:bg-dark-700 ${code === lang ? 'bg-dark-700' : ''}`}
+            aria-label={name}
+            title={name}
           >
-            <span class="text-xl mr-2">{flagEmojis[code as keyof typeof flagEmojis]}</span>
-            <span>{name}</span>
+            <span class="text-2xl">{flagEmojis[code as keyof typeof flagEmojis]}</span>
           </a>
         );
       })}
@@ -100,13 +101,10 @@ const flagEmojis = {
         const href = code === 'en' ? path : `/${code}${path}`;
         return (
           <option value={href} selected={code === lang}>
-            {name}
+            {flagEmojis[code as keyof typeof flagEmojis]} {name}
           </option>
         );
       })}
     </select>
-    <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none text-2xl">
-      {flagEmojis[lang]}
-    </div>
   </div>
 </div>

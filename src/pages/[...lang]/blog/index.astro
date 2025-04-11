@@ -51,7 +51,7 @@ const langPostsMap = {
 };
 
 // 获取当前语言的博客文章
-let posts = langPostsMap[lang] || enPosts;
+let posts = langPostsMap[lang as keyof typeof langPostsMap] || enPosts;
 
 // 按发布日期排序，最新的在前面
 posts = posts.sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
@@ -80,7 +80,7 @@ posts = posts.sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publ
 
     {posts.length > 0 ? (
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {posts.map(post => (
+        {posts.map((post: any) => (
           <BlogCard post={post} />
         ))}
       </div>

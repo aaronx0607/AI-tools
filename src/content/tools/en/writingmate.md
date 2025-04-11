@@ -2,7 +2,7 @@
 id: writingmate
 name: WritingMate
 description: AI-powered writing assistant that helps improve writing quality, streamline content creation, and enhance productivity
-category: writing
+category: text-generation
 rating: 4.5
 reviews: 284
 website: https://writingmate.ai

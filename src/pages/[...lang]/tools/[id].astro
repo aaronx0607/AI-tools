@@ -28,12 +28,12 @@ export async function getStaticPaths() {
   };
 
   // 获取所有工具ID
-  const toolIds = [...new Set(enTools.map(tool => tool.frontmatter.id))];
+  const toolIds = [...new Set(enTools.map((tool: any) => tool.frontmatter.id))];
 
   // 为每个工具ID和语言创建路径
   for (const id of toolIds) {
     // 默认语言路径（英文）
-    const enTool = enTools.find(tool => tool.frontmatter.id === id);
+    const enTool = enTools.find((tool: any) => tool.frontmatter.id === id);
     if (enTool) {
       allPaths.push({
         params: { lang: undefined, id },
@@ -44,8 +44,8 @@ export async function getStaticPaths() {
     // 其他语言路径
     for (const lang of languages) {
       // 获取当前语言的工具数组
-      const langTools = langToolsMap[lang];
-      const langTool = langTools.find(tool => tool.frontmatter.id === id);
+      const langTools = langToolsMap[lang as keyof typeof langToolsMap];
+      const langTool = langTools.find((tool: any) => tool.frontmatter.id === id);
 
       if (langTool) {
         // 如果找到了特定语言的工具文件，使用它

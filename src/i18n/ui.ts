@@ -71,8 +71,7 @@ export const ui = {
     'blog.title': 'Blog',
     'blog.latest': 'Latest Articles',
     'blog.readMore': 'Read more',
-    'blog.publishedOn': 'Published on',
-    'blog.author': 'Author',
+
     'blog.relatedPosts': 'Related Posts',
     'blog.backToList': 'Back to Blog',
     'blog.noPosts': 'No blog posts found.',
@@ -141,8 +140,7 @@ export const ui = {
     'blog.title': 'Blog',
     'blog.latest': 'Últimos Artículos',
     'blog.readMore': 'Leer más',
-    'blog.publishedOn': 'Publicado el',
-    'blog.author': 'Autor',
+
     'blog.relatedPosts': 'Publicaciones Relacionadas',
     'blog.backToList': 'Volver al Blog',
     'blog.noPosts': 'No se encontraron publicaciones de blog.',
@@ -211,8 +209,7 @@ export const ui = {
     'blog.title': 'Blog',
     'blog.latest': 'Derniers Articles',
     'blog.readMore': 'Lire plus',
-    'blog.publishedOn': 'Publié le',
-    'blog.author': 'Auteur',
+
     'blog.relatedPosts': 'Articles Connexes',
     'blog.backToList': 'Retour au Blog',
     'blog.noPosts': 'Aucun article de blog trouvé.',
@@ -281,8 +278,7 @@ export const ui = {
     'blog.title': '博客',
     'blog.latest': '最新文章',
     'blog.readMore': '阅读更多',
-    'blog.publishedOn': '发布于',
-    'blog.author': '作者',
+
     'blog.relatedPosts': '相关文章',
     'blog.backToList': '返回博客列表',
     'blog.noPosts': '暂无博客文章。',

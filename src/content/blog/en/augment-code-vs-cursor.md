@@ -2,8 +2,8 @@
 title: "Augment Code vs Cursor: Ultimate AI Code Editor Comparison"
 description: A comprehensive comparison of Augment Code and Cursor AI code editors to help developers choose the right tool for their needs.
 publishDate: 2025-04-11
-author: Aaron Hsu
-image: /blog/ai-code-editors-comparison.jpg
+author: BestFreeAI
+image: /blog/augment-code-vs-cursor.webp
 tags: [AI, Code Editors, Developer Tools, Augment Code, Cursor]
 ---
 
