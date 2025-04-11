@@ -1,7 +1,7 @@
 ---
 title: "Augment Code与Windsurf：哪个AI代码编辑器更适合现代开发者？"
 description: 对Augment Code和Windsurf这两款AI驱动的代码编辑器进行全面比较，帮助开发者选择适合其编码需求的工具。
-publishDate: 2025-06-23
+publishDate: 2025-04-11
 author: BestFreeAI
 image: /blog/augment-code-vs-windsurf.webp
 tags: [AI, 代码编辑器, 开发工具, Augment Code, Windsurf]
@@ -100,8 +100,8 @@ Windsurf采用独特的架构方法，作为一个独立的开发环境：
 Windsurf提供了具有竞争力的定价结构：
 
 - **免费层：** 基本功能，AI模型使用有限制
-- **专业版：** 每月25美元，增加AI使用限制和访问高级模型
-- **团队版：** 每用户每月50美元，具有协作功能和管理控制
+- **专业版：** 每月15美元，增加AI使用限制和访问高级模型
+- **团队版：** 每用户每月35美元，具有协作功能和管理控制
 
 ## 正面比较
 

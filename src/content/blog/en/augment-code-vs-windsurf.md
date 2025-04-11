@@ -1,7 +1,7 @@
 ---
 title: "Augment Code vs Windsurf: Which AI Code Editor Excels for Modern Developers?"
 description: A comprehensive comparison of Augment Code and Windsurf AI-powered code editors, helping developers select the right tool for their coding needs.
-publishDate: 2025-06-23
+publishDate: 2025-04-11
 author: BestFreeAI
 image: /blog/augment-code-vs-windsurf.webp
 tags: [AI, Code Editors, Developer Tools, Augment Code, Windsurf]
@@ -100,8 +100,8 @@ Windsurf employs a distinct architectural approach as a standalone development e
 Windsurf offers a competitive pricing structure:
 
 - **Free Tier:** Basic functionality with limitations on AI model usage
-- **Professional:** $25/month with increased AI usage limits and access to premium models
-- **Team:** $50/user/month with collaboration features and administration controls
+- **Professional:** $15/month with increased AI usage limits and access to premium models
+- **Team:** $35/user/month with collaboration features and administration controls
 
 ## Head-to-Head Comparison
 
