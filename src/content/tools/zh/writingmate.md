@@ -23,6 +23,8 @@ tags:
 - 文本创作工具
 - 写作助手
 - AI文案写作
+publishedAt: 2023-01-26
+updatedAt: 2025-04-10
 website: https://writingmate.ai
 ---
 # WritingMate

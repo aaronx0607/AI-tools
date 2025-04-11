@@ -24,6 +24,8 @@ tags:
   - 数据可视化
   - AI 洞察
 website: https://www.domo.com
+publishedAt: 2015-04-08
+updatedAt: 2025-04-03
 ---
 # Domo
 

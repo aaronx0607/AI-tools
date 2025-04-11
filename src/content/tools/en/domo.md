@@ -8,6 +8,8 @@ reviews: 392
 website: https://www.domo.com
 icon: /icon/domo.svg
 tags: [data analytics, business intelligence, predictive analytics, data visualization, AI insights]
+publishedAt: 2015-04-08
+updatedAt: 2025-04-03
 pricing:
   free: Limited free tier
   standard: Custom pricing

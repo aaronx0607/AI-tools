@@ -14,6 +14,8 @@ pricing:
   developer: $30/month
   enterprise: Tarification personnalisée
 tags: [AI coding, collaboration d'équipe, assistant de code, analyse de dépôt, IA d'entreprise]
+publishedAt: 2023-09-21
+updatedAt: 2025-04-04
 features: [Compréhension approfondie du code source et sensibilisation au contexte, Fonctionnalités de collaboration en équipe, Intégration Slack pour une assistance en temps réel, Utilisation illimitée de l'IA (sans limites de tokens), Recommandations de code à l'échelle du dépôt]
 ---
 # Augment Code

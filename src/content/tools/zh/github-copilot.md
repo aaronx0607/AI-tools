@@ -12,7 +12,9 @@ pricing:
   pro: $10/month
   business: $19/user/month
   enterprise: $39/user/month
-tags: [AI 编码、配对编程、代码补全、GitHub 集成、Microsoft]
+tags: [AI 编码, 配对编程, 代码补全, GitHub 集成, Microsoft]
+publishedAt: 2022-06-21
+updatedAt: 2025-04-09
 features: [实时代码建议和补全, 多文件上下文理解, 代码解释的聊天界面, 与流行的IDE集成, 访问高级AI模型]
 ---
 # GitHub Copilot

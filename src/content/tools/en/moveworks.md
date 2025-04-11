@@ -8,6 +8,8 @@ reviews: 354
 website: https://www.moveworks.com
 icon: /icon/moveworks.jpeg
 tags: [AI automation, business process, enterprise AI, conversational AI, workflow automation]
+publishedAt: 2016-09-22
+updatedAt: 2025-04-11
 pricing:
   free: Limited demo access
   business: Custom pricing

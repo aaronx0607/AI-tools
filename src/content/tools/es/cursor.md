@@ -24,6 +24,8 @@ tags:
 - herramientas para desarrolladores
 - asistente de programación
 - IDE
+publishedAt: 2023-03-14
+updatedAt: 2025-04-05
 website: https://cursor.sh
 ---
 # Cursor

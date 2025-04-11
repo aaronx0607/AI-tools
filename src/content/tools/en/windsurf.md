@@ -8,6 +8,8 @@ reviews: 290
 website: https://windsurf.com
 icon: /icon/windsurf.svg
 tags: [AI coding, code editor, context awareness, bug fixing, code completion]
+publishedAt: 2022-11-15
+updatedAt: 2025-04-04
 pricing:
   free: Basic features with limited premium credits
   pro: $15/month

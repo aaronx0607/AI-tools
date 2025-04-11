@@ -3,7 +3,15 @@ import { languages } from '@i18n/ui';
 import { getLangFromUrl } from '@i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
-const path = Astro.url.pathname.replace(`/${lang}`, '') || '/';
+let path = Astro.url.pathname.replace(`/${lang}`, '') || '/';
+
+// 检查当前页面是否是标签页，如果是，则在切换语言时跳转到标签列表页
+// 使用正则表达式检查路径是否匹配 /tags/xxx 模式
+const isTagPage = /^\/tags\/[^/]+$/.test(path);
+if (isTagPage) {
+  // 如果是标签页，则将路径设置为标签列表页
+  path = '/tags';
+}
 
 // 语言代码到国旗的映射
 const flagEmojis = {

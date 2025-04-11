@@ -12,7 +12,9 @@ pricing:
   pro: $15/month
   team: $35/user/month
   enterprise: 自定义定价
-tags: [AI 编码、代码编辑器、上下文感知、错误修复、代码补全]
+tags: [AI 编码, 代码编辑器, 上下文感知, 错误修复, 代码补全]
+publishedAt: 2022-11-15
+updatedAt: 2025-04-04
 features: [大型代码库的高级上下文感知, 无限代码自动完成, SuperComplete用于多行代码生成, 用于自动化工作流的级联功能, 编辑器内 AI 聊天助手]
 ---
 # Windsurf

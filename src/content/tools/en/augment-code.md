@@ -8,6 +8,8 @@ reviews: 325
 website: https://www.augmentcode.com
 icon: /icon/augment-code.svg
 tags: [AI coding, team collaboration, code assistant, repository analysis, enterprise AI]
+publishedAt: 2023-09-21
+updatedAt: 2025-04-04
 pricing:
   free: 14-day trial
   community: $0 with 3,000 messages/month limit

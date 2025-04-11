@@ -37,7 +37,7 @@ const langToolsMap = {
 // 获取当前语言的工具文件
 let toolFiles = langToolsMap[lang] || enTools;
 
-// 收集所有标签
+// 只收集当前语言的标签
 const allTags = new Set();
 toolFiles.forEach((tool: any) => {
   if (tool.frontmatter.tags && Array.isArray(tool.frontmatter.tags)) {
@@ -86,7 +86,9 @@ toolFiles.forEach((tool: any) => {
 
     <div class="flex flex-wrap gap-4 mb-12">
       {tags.map((tag: any) => {
-        const tagUrl = lang === 'en' ? `/tags/${encodeURIComponent(tag)}` : `/${lang}/tags/${encodeURIComponent(tag)}`;
+        // 将标签转换为 URL 安全的格式
+        const urlTag = tag.toLowerCase().replace(/\s+/g, '-');
+        const tagUrl = lang === 'en' ? `/tags/${urlTag}` : `/${lang}/tags/${urlTag}`;
         return (
           <a
             href={tagUrl}

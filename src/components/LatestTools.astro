@@ -25,6 +25,7 @@ const langToolsMap = {
 const lang = getLangFromUrl(Astro.url);
 let toolFiles = langToolsMap[lang] || enTools;
 
+// 将工具转换为对象数组，并添加updatedAt字段
 const allTools = toolFiles.map((tool: any) => ({
   id: tool.frontmatter.id,
   name: tool.frontmatter.name,
@@ -33,11 +34,19 @@ const allTools = toolFiles.map((tool: any) => ({
   rating: tool.frontmatter.rating,
   reviews: tool.frontmatter.reviews,
   website: tool.frontmatter.website,
-  icon: tool.frontmatter.icon
+  icon: tool.frontmatter.icon,
+  updatedAt: tool.frontmatter.updatedAt || '2000-01-01' // 如果没有updatedAt字段，使用默认日期
 }));
 
+// 按updatedAt字段排序，最新的在前面
+const sortedTools = allTools.sort((a, b) => {
+  const dateA = new Date(a.updatedAt);
+  const dateB = new Date(b.updatedAt);
+  return dateB.getTime() - dateA.getTime();
+});
+
 // 获取最新的6个工具
-const latestTools = allTools.slice(0, 6);
+const latestTools = sortedTools.slice(0, 6);
 
 const t = useTranslations(lang);
 ---

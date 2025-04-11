@@ -25,6 +25,8 @@ tags:
 - clonage vocal
 - génération audio
 - synthèse de la parole
+publishedAt: 2023-01-11
+updatedAt: 2025-04-01
 website: https://elevenlabs.io
 ---
 # ElevenLabs

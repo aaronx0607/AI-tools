@@ -8,6 +8,8 @@ reviews: 389
 website: https://cursor.sh
 icon: /icon/cursor.svg
 tags: [AI coding, code generation, developer tools, programming assistant, IDE]
+publishedAt: 2023-03-14
+updatedAt: 2025-04-05
 pricing:
   free: Basic version with core features
   pro: $20/month for full capabilities

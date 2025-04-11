@@ -24,6 +24,8 @@ tags:
 - OpenAI
 - arte digital
 - imágenes realistas
+publishedAt: 2024-05-13
+updatedAt: 2025-04-08
 website: https://openai.com
 ---
 # Generador de Imágenes GPT-4o

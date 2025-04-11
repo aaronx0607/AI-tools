@@ -14,6 +14,8 @@ pricing:
   developer: $30/month
   enterprise: Precios personalizados
 tags: [AI coding, colaboración en equipo, asistente de código, análisis de repositorios, inteligencia artificial empresarial]
+publishedAt: 2023-09-21
+updatedAt: 2025-04-04
 features: [Comprensión profunda de la base de código y conciencia del contexto, Características de colaboración en equipo, Integración de Slack para asistencia en tiempo real, Uso ilimitado de IA (sin límites de tokens), Recomendaciones de código a nivel de repositorio]
 ---
 # Augment Code

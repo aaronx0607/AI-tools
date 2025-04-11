@@ -8,6 +8,8 @@ reviews: 245
 website: https://cline.bot/
 icon: /icon/cline.svg
 tags: [AI coding, VSCode extension, token-based, model flexibility, code generation]
+publishedAt: 2023-05-22
+updatedAt: 2025-04-06
 pricing:
   free: Pay only for API tokens used
   premium: Various model options with different pricing

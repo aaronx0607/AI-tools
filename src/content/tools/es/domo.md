@@ -24,6 +24,8 @@ tags:
 - análisis predictivo
 - visualización de datos
 - conocimientos de IA
+publishedAt: 2015-04-08
+updatedAt: 2025-04-03
 website: https://www.domo.com
 ---
 # Domo

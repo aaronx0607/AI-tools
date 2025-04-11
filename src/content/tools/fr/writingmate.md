@@ -24,6 +24,8 @@ tags:
 - créateur de texte
 - assistant de rédaction
 - rédaction publicitaire AI
+publishedAt: 2023-01-26
+updatedAt: 2025-04-10
 website: https://writingmate.ai
 ---
 # WritingMate

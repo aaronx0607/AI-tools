@@ -1,24 +1,26 @@
 ---
 id: writingmate
 name: WritingMate
-description: Advanced AI content generator with specialized tools for various writing needs
-category: text-generation
-rating: 4.8
-reviews: 278
+description: AI-powered writing assistant that helps improve writing quality, streamline content creation, and enhance productivity
+category: writing
+rating: 4.5
+reviews: 284
 website: https://writingmate.ai
 icon: /icon/writingmate.avif
-tags: [AI writing, content generation, text creator, writing assistant, AI copywriting]
+tags: [writing assistant, content creation, grammar checker, AI writing, productivity]
+publishedAt: 2023-01-26
+updatedAt: 2025-04-10
 pricing:
-  free: true
-  standard: $9.99/month
-  premium: $19.99/month
+  free: Basic version with limited features
+  standard: $10/month
+  professional: $20/month
   enterprise: Custom pricing
 features:
-  - Text generation with customizable tone and length
-  - Multiple specialized writing tools (stories, lyrics, notes, etc.)
-  - Support for over 15 languages
-  - AI content detector integration
-  - Commercial usage rights (paid plans)
+  - AI-powered writing suggestions and improvements
+  - Grammar and spelling correction
+  - Content generation for various formats
+  - Style and tone adaptation
+  - Plagiarism detection and prevention
 ---
 
 # WritingMate

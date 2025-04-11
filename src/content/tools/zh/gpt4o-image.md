@@ -24,6 +24,8 @@ tags:
   - 数字艺术
   - 真实图像
 website: https://openai.com
+publishedAt: 2024-05-13
+updatedAt: 2025-04-08
 ---
 # GPT-4o 图像生成器
 

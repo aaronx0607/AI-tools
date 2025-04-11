@@ -23,6 +23,8 @@ tags:
 - IA empresarial
 - IA conversacional
 - automatización de flujos de trabajo
+publishedAt: 2016-09-22
+updatedAt: 2025-04-11
 website: https://www.moveworks.com
 ---
 # Moveworks

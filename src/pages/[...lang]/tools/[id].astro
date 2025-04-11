@@ -115,7 +115,9 @@ const content = await tool.compiledContent();
         {tool.frontmatter.tags && (
           <div class="flex flex-wrap gap-2 mb-6 non-prose">
             {tool.frontmatter.tags.map((tag: string) => {
-              const tagUrl = lang === 'en' ? `/tags/${encodeURIComponent(tag)}` : `/${lang}/tags/${encodeURIComponent(tag)}`;
+              // 将标签转换为 URL 安全的格式
+              const urlTag = tag.toLowerCase().replace(/\s+/g, '-');
+              const tagUrl = lang === 'en' ? `/tags/${urlTag}` : `/${lang}/tags/${urlTag}`;
               return (
                 <a
                   href={tagUrl}
@@ -153,7 +155,9 @@ const content = await tool.compiledContent();
             <div class="text-dark-400 mb-1">{t('tool.tags')}</div>
             <div class="flex flex-wrap gap-2">
               {tool.frontmatter.tags.map((tag: string) => {
-                const tagUrl = lang === 'en' ? `/tags/${encodeURIComponent(tag)}` : `/${lang}/tags/${encodeURIComponent(tag)}`;
+                // 将标签转换为 URL 安全的格式
+                const urlTag = tag.toLowerCase().replace(/\s+/g, '-');
+                const tagUrl = lang === 'en' ? `/tags/${urlTag}` : `/${lang}/tags/${urlTag}`;
                 return (
                   <a
                     href={tagUrl}

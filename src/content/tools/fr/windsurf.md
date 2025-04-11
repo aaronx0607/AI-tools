@@ -14,6 +14,8 @@ pricing:
   team: $35/user/month
   enterprise: Tarification personnalisée
 tags: [AI coding, éditeur de code, prise en compte du contexte, correction de bogues, complétion de code]
+publishedAt: 2022-11-15
+updatedAt: 2025-04-04
 features: [Contexte avancé pour une grande base de code, Complétion de code illimitée, SuperComplete pour la génération de code multi-lignes, Fonctionnalité de cascade pour les workflows automatisés, Assistant de chat IA intégré dans l'éditeur]
 ---
 # Windsurf

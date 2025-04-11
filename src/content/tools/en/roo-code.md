@@ -8,6 +8,8 @@ reviews: 210
 website: https://roocode.com/
 icon: /icon/roo-code.jpg
 tags: [AI coding, open source, autonomous agent, multi-model, VSCode extension]
+publishedAt: 2023-04-18
+updatedAt: 2025-04-02
 pricing:
   free: Open-source with pay-per-use API costs
 features:

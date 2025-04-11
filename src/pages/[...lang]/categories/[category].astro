@@ -69,8 +69,15 @@ const categoryTools = toolFiles
     rating: tool.frontmatter.rating,
     reviews: tool.frontmatter.reviews,
     website: tool.frontmatter.website,
-    icon: tool.frontmatter.icon
-  }));
+    icon: tool.frontmatter.icon,
+    updatedAt: tool.frontmatter.updatedAt || '2000-01-01' // 如果没有updatedAt字段，使用默认日期
+  }))
+  // 按updatedAt字段排序，最新的在前面
+  .sort((a, b) => {
+    const dateA = new Date(a.updatedAt);
+    const dateB = new Date(b.updatedAt);
+    return dateB.getTime() - dateA.getTime();
+  });
 ---
 
 <Layout

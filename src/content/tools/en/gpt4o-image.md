@@ -4,10 +4,12 @@ name: GPT-4o Image Generator
 description: OpenAI's advanced AI image generation model with superior quality and text rendering capabilities
 category: image-generation
 rating: 4.9
-reviews: 456
-website: https://openai.com
+reviews: 427
+website: https://openai.com/gpt-4o
 icon: /icon/openai.svg
 tags: [AI image generation, text-to-image, OpenAI, digital art, realistic images]
+publishedAt: 2024-05-13
+updatedAt: 2025-04-08
 pricing:
   free: Basic access with ChatGPT
   plus: $20/month for ChatGPT Plus
@@ -104,4 +106,4 @@ GPT-4o image generation is available through ChatGPT with the following access t
 - Dedicated support
 - Integration capabilities
 
-GPT-4o Image Generator represents a significant step forward in AI image generation technology, offering creators, businesses, and individuals a powerful tool to transform text descriptions into high-quality visual content with unprecedented accuracy and detail. 
+GPT-4o with Image represents a significant step forward in AI image generation technology, offering creators, businesses, and individuals a powerful tool to transform text descriptions into high-quality visual content with unprecedented accuracy and detail. 

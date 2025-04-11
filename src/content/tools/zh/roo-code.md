@@ -9,7 +9,9 @@ website: https://roocode.com/
 icon: /icon/roo-code.jpg
 pricing:
   free: 开放源代码的按使用付费的API费用
-tags: [AI 编码，开源，自主代理，多模型，VSCode 扩展]
+tags: [AI 编码, 开源, 自主代理, 多模型, VSCode 扩展]
+publishedAt: 2023-04-18
+updatedAt: 2025-04-02
 features: [支持多个AI模型和提供商, 自定义AI模式，具备不同的人格特征, 终端命令执行, 浏览器自动化功能, Token 使用和成本追踪]
 ---
 # Roo Code

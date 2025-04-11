@@ -12,6 +12,8 @@ pricing:
   free: Pague solo por los tokens de API utilizados
   premium: Varias opciones de modelos con diferentes precios
 tags: [codificación de IA, extensión de VSCode, basado en tokens, flexibilidad del modelo, generación de código]
+publishedAt: 2023-05-22
+updatedAt: 2025-04-06
 features: [Flexibilidad de traer tu propia clave API, Planificación de edición de código en múltiples pasos, Ejecución de comandos en la terminal, Soporte para múltiples modelos de IA, Integración profunda de VSCode]
 ---
 # Cline

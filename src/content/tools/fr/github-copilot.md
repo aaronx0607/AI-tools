@@ -14,6 +14,8 @@ pricing:
   business: $19/user/month
   enterprise: $39/user/month
 tags: [AI coding, pair programming, code completion, intégration GitHub, Microsoft]
+publishedAt: 2022-06-21
+updatedAt: 2025-04-09
 features: [Suggestions et complétions de code en temps réel, Compréhension du contexte multi-fichiers, Interface de chat pour les explications de code, Intégration avec les IDE populaires, Accès à des modèles d'IA avancés]
 ---
 # GitHub Copilot

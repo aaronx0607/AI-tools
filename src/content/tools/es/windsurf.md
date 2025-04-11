@@ -14,6 +14,8 @@ pricing:
   team: $35/user/month
   enterprise: Precios personalizados
 tags: [AI codificación, editor de código, conciencia del contexto, reparación de errores, finalización de código]
+publishedAt: 2022-11-15
+updatedAt: 2025-04-04
 features: [Conciencia contextual avanzada para grandes bases de código, Autocompletado de código ilimitado, SuperComplete para la generación de código multilinea, Función de cascada para flujos de trabajo automatizados, Asistente de chat de IA en el editor]
 ---
 # Windsurf

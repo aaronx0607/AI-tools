@@ -8,6 +8,8 @@ reviews: 485
 website: https://www.synthesia.io
 icon: /icon/synthesia.avif
 tags: [AI video generation, virtual presenters, video creation, multilingual videos, digital avatars]
+publishedAt: 2018-11-09
+updatedAt: 2025-04-02
 pricing:
   free: Limited trial
   personal: $30/month

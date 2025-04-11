@@ -25,6 +25,8 @@ tags:
   - 音频生成
   - 语音合成
 website: https://elevenlabs.io
+publishedAt: 2023-01-11
+updatedAt: 2025-04-01
 ---
 # ElevenLabs
 

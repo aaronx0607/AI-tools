@@ -7,7 +7,9 @@ rating: 4.8
 reviews: 412
 website: https://elevenlabs.io
 icon: /icon/elevenlabs.svg
-tags: [AI voice, text-to-speech, voice cloning, audio generation, speech synthesis]
+tags: [voice AI, text-to-speech, voice cloning, audio synthesis, content creation]
+publishedAt: 2023-01-11
+updatedAt: 2025-04-01
 pricing:
   free: Basic access with limited features
   starter: $5/month

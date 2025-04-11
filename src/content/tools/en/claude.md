@@ -8,6 +8,8 @@ reviews: 527
 website: https://claude.ai
 icon: /icon/claude.png
 tags: [AI assistant, conversational AI, natural language processing, Anthropic, safety-focused AI]
+publishedAt: 2023-03-15
+updatedAt: 2025-04-07
 pricing:
   free: Basic version with limited usage
   pro: $20/month

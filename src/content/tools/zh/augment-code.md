@@ -12,7 +12,9 @@ pricing:
   community: $0 with 3,000 messages/month limit
   developer: $30/month
   enterprise: 自定义定价
-tags: [AI编码，团队协作，代码助手，代码库分析，企业AI]
+tags: [AI编码, 团队协作, 代码助手, 代码库分析, 企业AI]
+publishedAt: 2023-09-21
+updatedAt: 2025-04-04
 features: [深度代码库理解与上下文意识, 团队协作功能, Slack 集成以提供实时帮助, 无限制的AI使用（没有令牌限制）, 整个仓库的代码建议]
 ---
 # Augment Code

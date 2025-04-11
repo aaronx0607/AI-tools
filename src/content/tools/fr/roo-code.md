@@ -11,6 +11,8 @@ icon: /icon/roo-code.jpg
 pricing:
   free: Open-source avec des coûts d'API payants à l'utilisation
 tags: [AI coding, open source, agent autonome, multi-modèle, extension VSCode]
+publishedAt: 2023-04-18
+updatedAt: 2025-04-02
 features: [Support pour plusieurs modèles et fournisseurs d'IA, Modes d'IA personnalisées avec différentes personnalités, Exécution de commandes terminales, Capacités d'automatisation du navigateur, Suivi de l'utilisation des jetons et des coûts]
 ---
 # Roo Code

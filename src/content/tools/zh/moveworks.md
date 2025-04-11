@@ -23,6 +23,8 @@ tags:
 - 企业AI
 - 对话式AI
 - 工作流自动化
+publishedAt: 2016-09-22
+updatedAt: 2025-04-11
 # End of Selection
 website: https://www.moveworks.com
 ---

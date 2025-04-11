@@ -22,6 +22,8 @@ tags:
 - 视频创作
 - 多语言视频
 - 数字化身
+publishedAt: 2018-11-09
+updatedAt: 2025-04-02
 website: https://www.synthesia.io
 ---
 # Synthesia

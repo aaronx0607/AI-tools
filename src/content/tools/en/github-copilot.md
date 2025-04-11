@@ -8,6 +8,8 @@ reviews: 450
 website: https://github.com/features/copilot
 icon: /icon/github-copilot.png
 tags: [AI coding, pair programming, code completion, GitHub integration, Microsoft]
+publishedAt: 2022-06-21
+updatedAt: 2025-04-09
 pricing:
   free: Limited version with 2,000 completions/month
   pro: $10/month

@@ -10,7 +10,9 @@ icon: /icon/cline.svg
 pricing:
   free: 仅为使用的API令牌付费
   premium: 各种型号选项和不同的定价
-tags: [AI 编程、VSCode 扩展、基于令牌、模型灵活性、代码生成]
+tags: [AI 编程, VSCode 扩展, 基于令牌, 模型灵活性, 代码生成]
+publishedAt: 2023-05-22
+updatedAt: 2025-04-06
 features: [自带API密钥的灵活性, 多步骤代码编辑规划, 终端命令执行, 支持多个AI模型, 深度 VSCode 集成]
 ---
 # Cline

@@ -38,16 +38,24 @@ const langToolsMap = {
 // 获取当前语言的工具文件
 let toolFiles = langToolsMap[lang] || enTools;
 
-const allTools = toolFiles.map(tool => ({
-  id: tool.frontmatter.id,
-  name: tool.frontmatter.name,
-  description: tool.frontmatter.description,
-  category: tool.frontmatter.category,
-  rating: tool.frontmatter.rating,
-  reviews: tool.frontmatter.reviews,
-  website: tool.frontmatter.website,
-  icon: tool.frontmatter.icon
-}));
+const allTools = toolFiles
+  .map((tool: any) => ({
+    id: tool.frontmatter.id,
+    name: tool.frontmatter.name,
+    description: tool.frontmatter.description,
+    category: tool.frontmatter.category,
+    rating: tool.frontmatter.rating,
+    reviews: tool.frontmatter.reviews,
+    website: tool.frontmatter.website,
+    icon: tool.frontmatter.icon,
+    updatedAt: tool.frontmatter.updatedAt || '2000-01-01' // 如果没有updatedAt字段，使用默认日期
+  }))
+  // 按updatedAt字段排序，最新的在前面
+  .sort((a, b) => {
+    const dateA = new Date(a.updatedAt);
+    const dateB = new Date(b.updatedAt);
+    return dateB.getTime() - dateA.getTime();
+  });
 ---
 
 <Layout

@@ -23,6 +23,8 @@ tags:
 - AI d'entreprise
 - AI conversationnelle
 - automatisation des flux de travail
+publishedAt: 2016-09-22
+updatedAt: 2025-04-11
 website: https://www.moveworks.com
 ---
 # Moveworks
