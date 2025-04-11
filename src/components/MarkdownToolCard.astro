@@ -1,0 +1,127 @@
+---
+import { getLangFromUrl, useTranslations } from '@i18n/utils';
+
+export interface Props {
+  toolId: string;
+}
+
+const { toolId } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// 根据当前语言获取工具数据
+let toolData;
+try {
+  // 尝试加载当前语言的工具数据
+  const toolModule = await import(`../content/tools/${lang}/${toolId}.md`);
+  toolData = {
+    id: toolId,
+    ...toolModule.frontmatter,
+  };
+} catch (e) {
+  // 如果当前语言不存在，回退到英文
+  try {
+    const toolModule = await import(`../content/tools/en/${toolId}.md`);
+    toolData = {
+      id: toolId,
+      ...toolModule.frontmatter,
+    };
+  } catch (e) {
+    // 如果工具不存在，返回错误信息
+    toolData = null;
+  }
+}
+
+// 检查是否有免费方案
+const hasFreeOption = toolData?.pricing?.free !== undefined;
+---
+
+{toolData ? (
+  <div class="my-6 bg-dark-800 p-6 rounded-lg border border-dark-700 hover:border-indigo-500/30 transition-all duration-300 shadow-md">
+    {/* 顶部区域：Logo、名称和标签 */}
+    <div class="flex items-center justify-between mb-4">
+      <div class="flex items-center gap-3">
+        {/* 工具图标 */}
+        <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-dark-700 rounded-lg overflow-hidden">
+          {toolData.icon && (
+            toolData.icon.startsWith('http') || toolData.icon.startsWith('/') ? (
+              <img src={toolData.icon} alt={`${toolData.name} icon`} class="w-full h-full object-cover" />
+            ) : (
+              <span class="text-2xl">{toolData.icon}</span>
+            )
+          )}
+        </div>
+        
+        {/* 工具名称 */}
+        <h3 class="text-xl font-semibold">
+          <a href={lang === 'en' ? `/tools/${toolData.id}` : `/${lang}/tools/${toolData.id}`} class="text-dark-50 hover:text-indigo-400">
+            {toolData.name}
+          </a>
+        </h3>
+      </div>
+      
+      {/* 右侧标签 */}
+      <div class="flex items-center gap-2 flex-shrink-0">
+        {hasFreeOption && (
+          <span class="text-xs px-2 py-0.5 bg-green-900/30 text-green-400 rounded-full border border-green-800/50 whitespace-nowrap">
+            {t('tool.freeOption') || 'Free Option'}
+          </span>
+        )}
+        <a
+          href={lang === 'en' ? `/categories/${toolData.category}` : `/${lang}/categories/${toolData.category}`}
+          class="text-xs px-2 py-0.5 bg-dark-700 text-indigo-300 rounded-full hover:bg-dark-600 whitespace-nowrap"
+        >
+          {t(`categories.${toolData.category}` as keyof typeof import('@i18n/ui').ui.en)}
+        </a>
+      </div>
+    </div>
+    
+    {/* 描述 */}
+    <p class="text-dark-300 mb-3 text-sm leading-relaxed">{toolData.description}</p>
+    
+    {/* 评分 */}
+    <div class="flex items-center mb-3">
+      <span class="text-yellow-500">★</span>
+      <span class="ml-1 text-dark-200 font-medium">{toolData.rating}</span>
+      <span class="ml-2 text-dark-400 text-sm">({toolData.reviews} {t('tool.reviews')})</span>
+    </div>
+    
+    {/* 标签 */}
+    {toolData.tags && toolData.tags.length > 0 && (
+      <div class="flex flex-wrap gap-2 mb-4">
+        {toolData.tags.map((tag: string) => (
+          <a 
+            href={lang === 'en' ? `/tags/${tag.toLowerCase().replace(/\s+/g, '-')}` : `/${lang}/tags/${tag.toLowerCase().replace(/\s+/g, '-')}`}
+            class="text-xs px-2 py-1 bg-dark-700/50 text-dark-300 rounded-full hover:bg-dark-700 hover:text-indigo-300 transition-colors"
+          >
+            {tag}
+          </a>
+        ))}
+      </div>
+    )}
+    
+    {/* 按钮 */}
+    <div class="flex flex-wrap sm:flex-nowrap gap-2 mt-4">
+      {toolData.website && (
+        <a
+          href={toolData.website}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-full sm:flex-1 text-center py-2 px-3 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-md transition-colors"
+        >
+          {t('tool.visit-website')}
+        </a>
+      )}
+      <a
+        href={lang === 'en' ? `/tools/${toolData.id}` : `/${lang}/tools/${toolData.id}`}
+        class="w-full sm:flex-1 text-center py-2 px-3 bg-dark-700 hover:bg-dark-600 text-white text-sm font-medium rounded-md transition-colors"
+      >
+        {t('tool.view-details')}
+      </a>
+    </div>
+  </div>
+) : (
+  <div class="my-6 p-4 bg-red-900/20 border border-red-800 rounded-lg">
+    <p class="text-red-300">⚠️ {t('tool.notFound', { id: toolId })}</p>
+  </div>
+)}

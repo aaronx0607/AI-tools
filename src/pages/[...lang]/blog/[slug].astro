@@ -2,6 +2,8 @@
 import Layout from '@layouts/Layout.astro';
 import { getLangFromUrl, useTranslations } from '@i18n/utils';
 import { marked } from 'marked';
+import { parseMarkdown, replaceToolCardPlaceholders } from '@utils/markdown.js';
+import MarkdownToolCard from '@components/MarkdownToolCard.astro';
 
 export async function getStaticPaths() {
   const languages = ['en', 'es', 'fr', 'zh'];
@@ -110,8 +112,19 @@ const formatDate = (dateString) => {
   }).format(date);
 };
 
-// 将Markdown转换为HTML
-const content = marked.parse(post.content);
+// 使用自定义Markdown渲染器处理内容
+const parsedHtml = parseMarkdown(post.content, lang);
+
+// 提取工具ID，用于服务器端渲染
+const toolIdRegex = /<!--TOOL_CARD_PLACEHOLDER:([a-z0-9-]+)-->/g;
+const toolIds = [];
+let match;
+while ((match = toolIdRegex.exec(parsedHtml)) !== null) {
+  toolIds.push(match[1]);
+}
+
+// 替换工具卡片占位符为特殊的HTML标记
+const content = replaceToolCardPlaceholders(parsedHtml);
 
 // 获取相关文章
 const enBlogModules = import.meta.glob('@content/blog/en/*.md', { eager: true });
@@ -148,7 +161,7 @@ allPosts = allPosts.filter(p => p.slug !== post.slug);
 // 如果有标签，尝试找到相关文章
 let relatedPosts = [];
 if (post.tags && post.tags.length > 0) {
-  relatedPosts = allPosts.filter(p => 
+  relatedPosts = allPosts.filter(p =>
     p.tags && p.tags.some(tag => post.tags.includes(tag))
   ).slice(0, 3);
 } else {
@@ -185,9 +198,9 @@ if (post.tags && post.tags.length > 0) {
     <article class="bg-dark-800 border border-dark-700 rounded-lg overflow-hidden mb-12">
       {post.image && (
         <div class="aspect-video overflow-hidden">
-          <img 
-            src={post.image} 
-            alt={post.title} 
+          <img
+            src={post.image}
+            alt={post.title}
             class="w-full h-full object-cover"
           />
         </div>
@@ -217,7 +230,22 @@ if (post.tags && post.tags.length > 0) {
         )}
 
         <div class="prose prose-invert prose-dark max-w-none">
-          <Fragment set:html={content} />
+          {toolIds.length > 0 ? (
+            <div>
+              {parsedHtml.split(/<!--TOOL_CARD_PLACEHOLDER:[a-z0-9-]+-->/g).map((segment, index) => (
+                <Fragment key={index}>
+                  <div set:html={segment} />
+                  {index < toolIds.length && (
+                    <div class="my-8">
+                      <MarkdownToolCard toolId={toolIds[index]} />
+                    </div>
+                  )}
+                </Fragment>
+              ))}
+            </div>
+          ) : (
+            <div set:html={content} />
+          )}
         </div>
       </div>
     </article>
@@ -230,9 +258,9 @@ if (post.tags && post.tags.length > 0) {
             <div class="bg-dark-800 border border-dark-700 rounded-lg overflow-hidden hover:border-dark-600 transition-colors duration-200">
               {relatedPost.image && (
                 <div class="aspect-video overflow-hidden">
-                  <img 
-                    src={relatedPost.image} 
-                    alt={relatedPost.title} 
+                  <img
+                    src={relatedPost.image}
+                    alt={relatedPost.title}
                     class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                   />
                 </div>
@@ -244,7 +272,7 @@ if (post.tags && post.tags.length > 0) {
                   </a>
                 </h3>
                 <p class="text-dark-300 text-sm line-clamp-2 mb-2">{relatedPost.description}</p>
-                <a 
+                <a
                   href={lang === 'en' ? `/blog/${relatedPost.slug}` : `/${lang}/blog/${relatedPost.slug}`}
                   class="text-indigo-400 hover:text-indigo-300 text-sm font-medium inline-flex items-center"
                 >
@@ -261,7 +289,7 @@ if (post.tags && post.tags.length > 0) {
     )}
 
     <div class="text-center">
-      <a 
+      <a
         href={lang === 'en' ? '/blog' : `/${lang}/blog`}
         class="inline-flex items-center text-indigo-400 hover:text-indigo-300 font-medium"
       >

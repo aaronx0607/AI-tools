@@ -61,6 +61,7 @@ export const ui = {
     'tool.plans.mega': 'Mega',
     'tool.visit-website': 'Visit Website',
     'tool.view-details': 'View Details',
+    'tool.notFound': 'Tool with ID "{id}" not found',
     'categories.no-tools': 'No tools found in this category yet.',
     'tags.title': 'Tags',
     'tags.description': 'Browse AI tools by tags to find exactly what you need.',
@@ -74,7 +75,7 @@ export const ui = {
     'blog.relatedPosts': 'Related Posts',
     'blog.backToList': 'Back to Blog',
     'blog.noPosts': 'No blog posts found.',
-    'tool.not-found': 'Tool not found'
+    'tool.freeOption': 'Free Option'
   },
   es: {
     'nav.home': 'Inicio',
@@ -129,6 +130,7 @@ export const ui = {
     'tool.plans.mega': 'Mega',
     'tool.visit-website': 'Visitar Sitio Web',
     'tool.view-details': 'Ver Detalles',
+    'tool.notFound': 'Herramienta con ID "{id}" no encontrada',
     'categories.no-tools': 'Aún no hay herramientas en esta categoría.',
     'tags.title': 'Etiquetas',
     'tags.description': 'Navega por herramientas de IA por etiquetas para encontrar exactamente lo que necesitas.',
@@ -142,7 +144,7 @@ export const ui = {
     'blog.relatedPosts': 'Publicaciones Relacionadas',
     'blog.backToList': 'Volver al Blog',
     'blog.noPosts': 'No se encontraron publicaciones de blog.',
-    'tool.not-found': 'Herramienta no encontrada'
+    'tool.freeOption': 'Opción Gratuita'
   },
   fr: {
     'nav.home': 'Accueil',
@@ -197,6 +199,7 @@ export const ui = {
     'tool.plans.mega': 'Mega',
     'tool.visit-website': 'Visiter le Site',
     'tool.view-details': 'Voir Détails',
+    'tool.notFound': 'Outil avec ID "{id}" non trouvé',
     'categories.no-tools': 'Aucun outil trouvé dans cette catégorie pour le moment.',
     'tags.title': 'Tags',
     'tags.description': 'Parcourez les outils IA par tags pour trouver exactement ce dont vous avez besoin.',
@@ -210,7 +213,7 @@ export const ui = {
     'blog.relatedPosts': 'Articles Connexes',
     'blog.backToList': 'Retour au Blog',
     'blog.noPosts': 'Aucun article de blog trouvé.',
-    'tool.not-found': 'Outil non trouvé'
+    'tool.freeOption': 'Option Gratuit'
   },
   zh: {
     'nav.home': '首页',
@@ -265,6 +268,7 @@ export const ui = {
     'tool.plans.mega': '超级版',
     'tool.visit-website': '访问官网',
     'tool.view-details': '查看详情',
+    'tool.notFound': '未找到ID为"{id}"的工具',
     'categories.no-tools': '该分类下暂无工具。',
     'tags.title': '标签',
     'tags.description': '通过标签浏览AI工具，找到您需要的内容。',
@@ -278,6 +282,6 @@ export const ui = {
     'blog.relatedPosts': '相关文章',
     'blog.backToList': '返回博客列表',
     'blog.noPosts': '暂无博客文章。',
-    'tool.not-found': '未找到工具'
+    'tool.freeOption': '免费方案'
   }
 } as const;
