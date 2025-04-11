@@ -10,7 +10,7 @@ features:
 - Intégration GitHub transparente
 icon: /icon/cursor.svg
 id: cursor
-name: Curseur
+name: Cursor
 pricing:
   enterprise: Tarification personnalisée pour les grandes organisations
   free: Version de base avec les fonctionnalités essentielles

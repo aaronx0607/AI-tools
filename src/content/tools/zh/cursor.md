@@ -9,7 +9,7 @@ features:
 - 无缝的 GitHub 集成
 icon: /icon/cursor.svg
 id: cursor
-name: 光标
+name: Cursor
 pricing:
   enterprise: 大型组织的定制定价
   free: 带核心功能的基础版本

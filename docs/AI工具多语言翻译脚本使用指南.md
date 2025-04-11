@@ -57,7 +57,7 @@ python translate_tools.py --api-key YOUR_OPENROUTER_API_KEY --file src/content/t
 ### 指定目标语言
 
 ```bash
-python3 translate_tools.py --api-key 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 --languages zh,es
+python3 translate_tools.py --api-key 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 --languages zh,es
 ```
 
 这将只翻译到简体中文和西班牙语。
