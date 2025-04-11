@@ -1,0 +1,61 @@
+---
+import { getLangFromUrl, useTranslations } from '@i18n/utils';
+import BlogCard from './BlogCard.astro';
+
+// 使用import.meta.glob静态导入所有语言的博客文件
+const enBlogModules = import.meta.glob('@content/blog/en/*.md', { eager: true });
+const esBlogModules = import.meta.glob('@content/blog/es/*.md', { eager: true });
+const frBlogModules = import.meta.glob('@content/blog/fr/*.md', { eager: true });
+const zhBlogModules = import.meta.glob('@content/blog/zh/*.md', { eager: true });
+
+// 将模块转换为博客文章数组
+const enPosts = Object.entries(enBlogModules).map(([path, post]) => ({
+  slug: path.split('/').pop()?.replace('.md', ''),
+  ...post.frontmatter,
+}));
+
+const esPosts = Object.entries(esBlogModules).map(([path, post]) => ({
+  slug: path.split('/').pop()?.replace('.md', ''),
+  ...post.frontmatter,
+}));
+
+const frPosts = Object.entries(frBlogModules).map(([path, post]) => ({
+  slug: path.split('/').pop()?.replace('.md', ''),
+  ...post.frontmatter,
+}));
+
+const zhPosts = Object.entries(zhBlogModules).map(([path, post]) => ({
+  slug: path.split('/').pop()?.replace('.md', ''),
+  ...post.frontmatter,
+}));
+
+// 创建语言到博客文章数组的映射
+const langPostsMap = {
+  en: enPosts,
+  es: esPosts,
+  fr: frPosts,
+  zh: zhPosts
+};
+
+// 获取当前语言的博客文章
+const lang = getLangFromUrl(Astro.url);
+let posts = langPostsMap[lang] || enPosts;
+
+// 按发布日期排序，最新的在前面
+posts = posts.sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
+
+// 获取最新的3篇文章
+const latestPosts = posts.slice(0, 3);
+
+const t = useTranslations(lang);
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  {latestPosts.length > 0 ? (
+    latestPosts.map((post) => (
+      <BlogCard post={post} />
+    ))
+  ) : (
+    <p class="text-dark-300 col-span-3 text-center py-8">{t('blog.noPosts')}</p>
+  )}
+</div>

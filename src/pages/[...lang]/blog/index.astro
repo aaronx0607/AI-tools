@@ -1,0 +1,93 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '@i18n/utils';
+import BlogCard from '@components/BlogCard.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: undefined } },
+    { params: { lang: 'es' } },
+    { params: { lang: 'fr' } },
+    { params: { lang: 'zh' } }
+  ];
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// 使用import.meta.glob静态导入所有语言的博客文件
+const enBlogModules = import.meta.glob('@content/blog/en/*.md', { eager: true });
+const esBlogModules = import.meta.glob('@content/blog/es/*.md', { eager: true });
+const frBlogModules = import.meta.glob('@content/blog/fr/*.md', { eager: true });
+const zhBlogModules = import.meta.glob('@content/blog/zh/*.md', { eager: true });
+
+// 将模块转换为博客文章数组
+const enPosts = Object.entries(enBlogModules).map(([path, post]) => ({
+  slug: path.split('/').pop()?.replace('.md', ''),
+  ...post.frontmatter,
+}));
+
+const esPosts = Object.entries(esBlogModules).map(([path, post]) => ({
+  slug: path.split('/').pop()?.replace('.md', ''),
+  ...post.frontmatter,
+}));
+
+const frPosts = Object.entries(frBlogModules).map(([path, post]) => ({
+  slug: path.split('/').pop()?.replace('.md', ''),
+  ...post.frontmatter,
+}));
+
+const zhPosts = Object.entries(zhBlogModules).map(([path, post]) => ({
+  slug: path.split('/').pop()?.replace('.md', ''),
+  ...post.frontmatter,
+}));
+
+// 创建语言到博客文章数组的映射
+const langPostsMap = {
+  en: enPosts,
+  es: esPosts,
+  fr: frPosts,
+  zh: zhPosts
+};
+
+// 获取当前语言的博客文章
+let posts = langPostsMap[lang] || enPosts;
+
+// 按发布日期排序，最新的在前面
+posts = posts.sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
+---
+
+<Layout
+  title={`${t('blog.title')} - ${t('site.title')}`}
+  description={t('site.description')}
+>
+  <div class="max-w-7xl mx-auto">
+    <nav class="text-sm mb-6">
+      <ol class="flex items-center space-x-2">
+        <li>
+          <a href={`/${lang === 'en' ? '' : lang}`} class="text-dark-400 hover:text-indigo-400">
+            {t('nav.home')}
+          </a>
+        </li>
+        <li class="text-dark-500">/</li>
+        <li class="text-dark-200">{t('blog.title')}</li>
+      </ol>
+    </nav>
+
+    <h1 class="text-4xl font-bold mb-8">
+      {t('blog.title')}
+    </h1>
+
+    {posts.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {posts.map(post => (
+          <BlogCard post={post} />
+        ))}
+      </div>
+    ) : (
+      <div class="bg-dark-800 border border-dark-700 rounded-lg p-8 text-center">
+        <p class="text-dark-300">{t('blog.noPosts')}</p>
+      </div>
+    )}
+  </div>
+</Layout>

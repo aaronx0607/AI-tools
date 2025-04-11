@@ -93,7 +93,7 @@ def translate_frontmatter(frontmatter, target_language_code, api_key, model):
     target_language = LANGUAGES[target_language_code]
     
     # 需要翻译的字段
-    fields_to_translate = ['name', 'description']
+    fields_to_translate = ['description']
     
     translated_frontmatter = frontmatter.copy()
     
@@ -183,7 +183,34 @@ def translate_and_save_file(source_file, target_language_code, api_key, model, f
     # 将翻译后的内容写入目标文件
     with open(target_dir, 'w', encoding='utf-8') as file:
         file.write("---\n")
-        file.write(yaml.dump(translated_frontmatter, allow_unicode=True))
+        
+        # 临时字典用于存储处理后的frontmatter
+        frontmatter_copy = translated_frontmatter.copy()
+        
+        # 特别处理tags和features为流格式
+        tags_list = None
+        features_list = None
+        
+        # 从frontmatter复制中取出tags和features
+        if 'tags' in frontmatter_copy and isinstance(frontmatter_copy['tags'], list):
+            tags_list = frontmatter_copy.pop('tags')
+            
+        if 'features' in frontmatter_copy and isinstance(frontmatter_copy['features'], list):
+            features_list = frontmatter_copy.pop('features')
+        
+        # 输出其他frontmatter内容
+        file.write(yaml.dump(frontmatter_copy, allow_unicode=True, sort_keys=False))
+        
+        # 手动添加tags行，使用流格式
+        if tags_list:
+            tags_str = ", ".join([f"{tag}" for tag in tags_list])
+            file.write(f"tags: [{tags_str}]\n")
+            
+        # 手动添加features行，使用流格式
+        if features_list:
+            features_str = ", ".join([f"{feature}" for feature in features_list])
+            file.write(f"features: [{features_str}]\n")
+        
         file.write("---\n")
         file.write(translated_content)
     

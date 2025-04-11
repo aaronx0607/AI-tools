@@ -27,5 +27,10 @@ const t = useTranslations(lang);
         {t('nav.tags')}
       </a>
     </li>
+    <li>
+      <a href={lang === 'en' ? '/blog' : `/${lang}/blog`} class="text-dark-200 hover:text-indigo-400">
+        {t('nav.blog')}
+      </a>
+    </li>
   </ul>
 </nav>

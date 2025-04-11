@@ -1,0 +1,275 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '@i18n/utils';
+import { marked } from 'marked';
+
+export async function getStaticPaths() {
+  const languages = ['en', 'es', 'fr', 'zh'];
+  const allPaths = [];
+
+  // 使用import.meta.glob静态导入所有语言的博客文件
+  const enBlogModules = import.meta.glob('@content/blog/en/*.md', { eager: true });
+  const esBlogModules = import.meta.glob('@content/blog/es/*.md', { eager: true });
+  const frBlogModules = import.meta.glob('@content/blog/fr/*.md', { eager: true });
+  const zhBlogModules = import.meta.glob('@content/blog/zh/*.md', { eager: true });
+
+  // 将模块转换为博客文章数组
+  const enPosts = Object.entries(enBlogModules).map(([path, post]) => ({
+    slug: path.split('/').pop()?.replace('.md', ''),
+    content: post.rawContent?.() || post.content,
+    ...post.frontmatter,
+    lang: 'en'
+  }));
+
+  const esPosts = Object.entries(esBlogModules).map(([path, post]) => ({
+    slug: path.split('/').pop()?.replace('.md', ''),
+    content: post.rawContent?.() || post.content,
+    ...post.frontmatter,
+    lang: 'es'
+  }));
+
+  const frPosts = Object.entries(frBlogModules).map(([path, post]) => ({
+    slug: path.split('/').pop()?.replace('.md', ''),
+    content: post.rawContent?.() || post.content,
+    ...post.frontmatter,
+    lang: 'fr'
+  }));
+
+  const zhPosts = Object.entries(zhBlogModules).map(([path, post]) => ({
+    slug: path.split('/').pop()?.replace('.md', ''),
+    content: post.rawContent?.() || post.content,
+    ...post.frontmatter,
+    lang: 'zh'
+  }));
+
+  // 创建语言到博客文章数组的映射
+  const langPostsMap = {
+    en: enPosts,
+    es: esPosts,
+    fr: frPosts,
+    zh: zhPosts
+  };
+
+  // 获取所有博客文章的slug
+  const slugs = [...new Set([
+    ...enPosts.map(post => post.slug),
+    ...esPosts.map(post => post.slug),
+    ...frPosts.map(post => post.slug),
+    ...zhPosts.map(post => post.slug)
+  ])];
+
+  // 为每个slug和语言创建路径
+  for (const slug of slugs) {
+    // 默认语言路径（英文）
+    const enPost = enPosts.find(post => post.slug === slug);
+    if (enPost) {
+      allPaths.push({
+        params: { lang: undefined, slug },
+        props: { post: enPost }
+      });
+    }
+
+    // 其他语言路径
+    for (const lang of languages) {
+      if (lang === 'en') continue; // 已经处理过英文
+
+      // 获取当前语言的博客文章
+      const langPosts = langPostsMap[lang];
+      const langPost = langPosts.find(post => post.slug === slug);
+
+      if (langPost) {
+        // 如果找到了特定语言的博客文章，使用它
+        allPaths.push({
+          params: { lang, slug },
+          props: { post: langPost }
+        });
+      } else if (enPost) {
+        // 如果没有找到特定语言的博客文章，使用英文版本
+        allPaths.push({
+          params: { lang, slug },
+          props: { post: enPost }
+        });
+      }
+    }
+  }
+
+  return allPaths;
+}
+
+const { post } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// 格式化日期
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  return new Intl.DateTimeFormat(lang === 'en' ? 'en-US' : lang === 'es' ? 'es-ES' : lang === 'fr' ? 'fr-FR' : 'zh-CN', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }).format(date);
+};
+
+// 将Markdown转换为HTML
+const content = marked.parse(post.content);
+
+// 获取相关文章
+const enBlogModules = import.meta.glob('@content/blog/en/*.md', { eager: true });
+const esBlogModules = import.meta.glob('@content/blog/es/*.md', { eager: true });
+const frBlogModules = import.meta.glob('@content/blog/fr/*.md', { eager: true });
+const zhBlogModules = import.meta.glob('@content/blog/zh/*.md', { eager: true });
+
+// 创建语言到博客文章数组的映射
+const langPostsMap = {
+  en: Object.entries(enBlogModules).map(([path, post]) => ({
+    slug: path.split('/').pop()?.replace('.md', ''),
+    ...post.frontmatter
+  })),
+  es: Object.entries(esBlogModules).map(([path, post]) => ({
+    slug: path.split('/').pop()?.replace('.md', ''),
+    ...post.frontmatter
+  })),
+  fr: Object.entries(frBlogModules).map(([path, post]) => ({
+    slug: path.split('/').pop()?.replace('.md', ''),
+    ...post.frontmatter
+  })),
+  zh: Object.entries(zhBlogModules).map(([path, post]) => ({
+    slug: path.split('/').pop()?.replace('.md', ''),
+    ...post.frontmatter
+  }))
+};
+
+// 获取当前语言的博客文章
+let allPosts = langPostsMap[lang] || langPostsMap.en;
+
+// 过滤掉当前文章
+allPosts = allPosts.filter(p => p.slug !== post.slug);
+
+// 如果有标签，尝试找到相关文章
+let relatedPosts = [];
+if (post.tags && post.tags.length > 0) {
+  relatedPosts = allPosts.filter(p => 
+    p.tags && p.tags.some(tag => post.tags.includes(tag))
+  ).slice(0, 3);
+} else {
+  // 如果没有标签，显示最新的3篇文章
+  relatedPosts = allPosts
+    .sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime())
+    .slice(0, 3);
+}
+---
+
+<Layout
+  title={`${post.title} - ${t('blog.title')} - ${t('site.title')}`}
+  description={post.description || t('site.description')}
+>
+  <div class="max-w-4xl mx-auto">
+    <nav class="text-sm mb-6">
+      <ol class="flex items-center space-x-2">
+        <li>
+          <a href={`/${lang === 'en' ? '' : lang}`} class="text-dark-400 hover:text-indigo-400">
+            {t('nav.home')}
+          </a>
+        </li>
+        <li class="text-dark-500">/</li>
+        <li>
+          <a href={`/${lang === 'en' ? '' : lang}/blog`} class="text-dark-400 hover:text-indigo-400">
+            {t('blog.title')}
+          </a>
+        </li>
+        <li class="text-dark-500">/</li>
+        <li class="text-dark-200">{post.title}</li>
+      </ol>
+    </nav>
+
+    <article class="bg-dark-800 border border-dark-700 rounded-lg overflow-hidden mb-12">
+      {post.image && (
+        <div class="aspect-video overflow-hidden">
+          <img 
+            src={post.image} 
+            alt={post.title} 
+            class="w-full h-full object-cover"
+          />
+        </div>
+      )}
+      <div class="p-8">
+        <h1 class="text-3xl md:text-4xl font-bold mb-4">
+          {post.title}
+        </h1>
+        <div class="flex flex-wrap items-center text-dark-400 text-sm mb-6">
+          <span>{t('blog.publishedOn')} {formatDate(post.publishDate)}</span>
+          {post.author && (
+            <>
+              <span class="mx-2">•</span>
+              <span>{t('blog.author')}: {post.author}</span>
+            </>
+          )}
+        </div>
+
+        {post.tags && post.tags.length > 0 && (
+          <div class="flex flex-wrap gap-2 mb-6">
+            {post.tags.map(tag => (
+              <span class="bg-dark-700 text-dark-300 text-xs px-2 py-1 rounded">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+
+        <div class="prose prose-invert prose-dark max-w-none">
+          <Fragment set:html={content} />
+        </div>
+      </div>
+    </article>
+
+    {relatedPosts.length > 0 && (
+      <div class="mb-12">
+        <h2 class="text-2xl font-semibold mb-6">{t('blog.relatedPosts')}</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {relatedPosts.map(relatedPost => (
+            <div class="bg-dark-800 border border-dark-700 rounded-lg overflow-hidden hover:border-dark-600 transition-colors duration-200">
+              {relatedPost.image && (
+                <div class="aspect-video overflow-hidden">
+                  <img 
+                    src={relatedPost.image} 
+                    alt={relatedPost.title} 
+                    class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                  />
+                </div>
+              )}
+              <div class="p-4">
+                <h3 class="text-lg font-semibold mb-2">
+                  <a href={lang === 'en' ? `/blog/${relatedPost.slug}` : `/${lang}/blog/${relatedPost.slug}`} class="text-dark-50 hover:text-indigo-400">
+                    {relatedPost.title}
+                  </a>
+                </h3>
+                <p class="text-dark-300 text-sm line-clamp-2 mb-2">{relatedPost.description}</p>
+                <a 
+                  href={lang === 'en' ? `/blog/${relatedPost.slug}` : `/${lang}/blog/${relatedPost.slug}`}
+                  class="text-indigo-400 hover:text-indigo-300 text-sm font-medium inline-flex items-center"
+                >
+                  {t('blog.readMore')}
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <div class="text-center">
+      <a 
+        href={lang === 'en' ? '/blog' : `/${lang}/blog`}
+        class="inline-flex items-center text-indigo-400 hover:text-indigo-300 font-medium"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+        </svg>
+        {t('blog.backToList')}
+      </a>
+    </div>
+  </div>
+</Layout>

@@ -4,6 +4,7 @@ import { getLangFromUrl, useTranslations } from '@i18n/utils';
 import SearchBar from '@components/SearchBar.astro';
 import CategoryGrid from '@components/CategoryGrid.astro';
 import LatestTools from '@components/LatestTools.astro';
+import LatestBlogPosts from '@/components/LatestBlogPosts.astro';
 
 export function getStaticPaths() {
   return [
@@ -55,7 +56,15 @@ const t = useTranslations(lang);
       </div>
       <LatestTools />
     </section>
-
+    <section class="mb-16">
+      <div class="flex justify-between items-center mb-8">
+        <h2 class="text-3xl font-semibold">{t('blog.latest')}</h2>
+        <a href={lang === 'en' ? '/blog' : `/${lang}/blog`} class="text-indigo-400 hover:text-indigo-300">
+          {t('nav.viewAll')} →
+        </a>
+      </div>
+      <LatestBlogPosts />
+    </section>
     <section class="bg-dark-800 border border-dark-700 rounded-lg p-8 mb-16">
       <div class="text-center">
         <h2 class="text-3xl font-semibold mb-4">{t('features.title')}</h2>
